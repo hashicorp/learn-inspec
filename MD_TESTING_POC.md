@@ -11,7 +11,7 @@ docker build -t hashi_inspec .
 
 > Just using the public containers for the POC as they can be combined atm.
 
-Open a seperate window to run the containers
+Open a seperate terminal window to run the container
 
 ```shell
 docker rm -f hashi_inspec
