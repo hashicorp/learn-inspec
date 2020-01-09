@@ -54,8 +54,9 @@ To generate the html output:
 
 ```shell
 cp code_blocks.rb ~/src/learn/pages
-inspec exec code_blocks.rb -t docker://hashi_inspec --reporter html:tests.html
-open tests.html
+cd ~/src/learn/pages
+inspec exec code_blocks.rb -t docker://hashi_inspec --reporter html:~/Desktop/md_test_results.html
+open ~/Desktop/md_test_results.html
 ```
 
 > Could be implemented as `Rakefile` in the future. 
