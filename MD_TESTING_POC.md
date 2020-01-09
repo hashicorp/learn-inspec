@@ -1,7 +1,7 @@
 # Steps to reproduce POC
 
 ## Setup Docker Container
-Copy the `Dockerfile` and all `*.tf|tfvars` to a directory. Built the named docker container
+Copy the `Dockerfile` and all `*.tf|tfvars` to a directory. Build the named docker container
 
 ```shell
 docker build -t hashi_inspec .
