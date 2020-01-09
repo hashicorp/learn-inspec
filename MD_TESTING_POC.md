@@ -4,6 +4,8 @@
 Clone this gist and cd to its directory. Build the docker image containing all products to test. 
 
 ```shell
+git clone git@gist.github.com:b8739a3cf4fea5591c8e041c35510b9f.git
+cd b8739a3cf4fea5591c8e041c35510b9f
 docker build -t hashi_inspec .
 ```
 
