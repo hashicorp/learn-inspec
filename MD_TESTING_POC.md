@@ -14,6 +14,7 @@ docker build -t hashi_inspec .
 Open a seperate terminal window to run the container
 
 ```shell
+# If this is your second run through
 docker rm -f hashi_inspec
 docker run -e VAULT_ADDR='http://127.0.0.1:8200' --name hashi_inspec -it hashi_inspec
 ```
