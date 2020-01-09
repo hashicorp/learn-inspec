@@ -48,7 +48,7 @@ If you have issues, copy the `Gemfile` from this post and run `bundle install` a
 
 ### Generate an inspec report
 
-Once you have the required gems you can execute the tests in this directory by copying `code_blocks.rb` to the `pages` directory of your local learn check out. 
+Once you have the required gems you can execute the tests in this directory by copying `code_blocks.rb` to the `pages` directory of your local [learn](https://github.com/hashicorp/learn) check out. 
 
 To generate the html output:
 
