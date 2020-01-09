@@ -22,7 +22,7 @@ This will open an interactive shell to the container to allow debugging.
 ## Setup Inspec
 
 ### Optional: Install ruby via rbenv
-This was tested under ruby 2.5.1 for backward compatiblity. You may skip these steps if your version is great then that or reference them if you have issues with macOS's system ruby. This guide assumes you have installed and configured [Home Brew](https://brew.sh/) as its beyond the scope of this document. 
+This was tested under ruby 2.5.1 for backward compatiblity. You may skip these steps if your version is greater then that.However you may reference them if you have issues with macOS's system ruby. This guide assumes you have installed and configured [Home Brew](https://brew.sh/) as its beyond the scope of this document. 
 
 ```shell
 brew install rbenv
