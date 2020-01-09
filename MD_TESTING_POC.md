@@ -23,7 +23,7 @@ This was tested under ruby 2.5.1 for backward compatiblity. You may skip these s
 ```shell
 brew install rbenv
 rbenv install 2.5.1
-rbenv use 2.5.1
+rbenv shell 2.5.1
 ```
 
 ### Setup your ruby environment
