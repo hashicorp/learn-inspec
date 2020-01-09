@@ -33,7 +33,7 @@ rbenv shell 2.5.1
 
 ### Setup your ruby environment
 
-If your system ruby or once you have configured rbenv use the following to install the required gems. 
+If your using system ruby or once you have configured rbenv use the following to install the required gems. 
 
 ```shell
 gem install kramdown
