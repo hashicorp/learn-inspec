@@ -48,11 +48,12 @@ If you have issues, copy the `Gemfile` from this post and run `bundle install` a
 
 ### Generate an inspec report
 
-Once you have the required gems you can execute the tests in this directory by copying it to the `pages` directory of your local learn check out. 
+Once you have the required gems you can execute the tests in this directory by copying `code_blocks.rb` to the `pages` directory of your local learn check out. 
 
 To generate the html output:
 
 ```shell
+cp code_blocks.rb ~/src/learn/pages
 inspec exec code_blocks.rb -t docker://hashi_inspec --reporter html:tests.html
 open tests.html
 ```
