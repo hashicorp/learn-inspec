@@ -9,7 +9,7 @@ cd b8739a3cf4fea5591c8e041c35510b9f
 docker build -t hashi_inspec .
 ```
 
-> Just using the public containers for the POC as they can be combined atm.
+> Just using the public containers for the POC as they can be combined atm with little effort.
 
 Open a seperate terminal window to run the container
 
