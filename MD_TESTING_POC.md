@@ -1,11 +1,13 @@
 # Steps to reproduce POC
 
 ## Setup Docker Container
-Copy the `Dockerfile` and all `*.tf|tfvars` to an empty directory. Build the named docker container
+Clone this gist and cd to its directory. Build the docker image containing all products to test. 
 
 ```shell
 docker build -t hashi_inspec .
 ```
+
+> Just using the public containers for the POC as they can be combined atm.
 
 Open a seperate window to run the containers
 
