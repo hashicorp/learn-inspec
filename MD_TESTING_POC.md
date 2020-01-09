@@ -42,3 +42,18 @@ gem install inspec-bin
 ```
 
 If you have issues, copy the `Gemfile` from this post and run `bundle install` and use `bundle exec` to run `inspec`
+
+> It might be worth looking into chefdk for portablity. 
+
+### Generate an inspec report
+
+Once you have the required gems you can execute the tests in this directory by copying it to the `pages` directory of your local learn check out. 
+
+To generate the html output:
+
+```shell
+inspec exec code_blocks.rb -t docker://hashi_inspec --reporter html:tests.html
+open tests.html
+```
+
+> Could be implemented as `Rakefile` in the future. 
