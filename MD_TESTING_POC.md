@@ -17,7 +17,7 @@ Open a seperate terminal window to run the container
 docker rm -f hashi_inspec
 docker run -e VAULT_ADDR='http://127.0.0.1:8200' --name hashi_inspec -it hashi_inspec
 ```
-This will open an interactive shell to the container to allow debuging. 
+This will open an interactive shell to the container to allow debugging. 
 
 ## Setup Inspec
 
