@@ -1,6 +1,6 @@
 # Steps to reproduce POC
 
-Disclaimer: Ruby applications on macOS can be difficult to distribute across multiple versions. I have hedged my bets with the instructions below. The final tooling would likely use a docker in docker approach if possible. 
+_Disclaimer: Ruby applications on macOS can be difficult to distribute across multiple versions. I have hedged my bets with the instructions below. The final tooling would likely use a docker in docker approach if possible. _
 
 ## Setup Docker Container
 Clone this gist and cd to its directory. Build the docker image containing all products to test. 
