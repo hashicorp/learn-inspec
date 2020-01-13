@@ -54,7 +54,7 @@ If you have issues, copy the `Gemfile` from this post and run `bundle install` a
 
 Once you have the required gems you can execute the tests in this directory by copying `code_blocks.rb` to the `pages` directory of your local [learn](https://github.com/hashicorp/learn) check out. 
 
-To generate the html output:
+To generate the [html output](https://drive.google.com/file/d/16EOMZyt76KCLsISZmGGRjEG_VS-oUtyw/view?usp=sharing):
 
 ```shell
 cp code_blocks.rb ~/src/learn/pages
