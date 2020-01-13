@@ -22,7 +22,7 @@ docker run -e VAULT_ADDR='http://127.0.0.1:8200' --name hashi_inspec -it hashi_i
 ```
 This will open an interactive shell to the container to allow debugging. 
 
-> Note the ability to add environmental variables would could interact with our code examples. 
+> Note the ability to add environmental variables which can interact with our code examples. 
 
 ## Setup Inspec
 
