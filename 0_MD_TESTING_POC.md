@@ -63,4 +63,6 @@ inspec exec code_blocks.rb -t docker://hashi_inspec --reporter html:~/Desktop/md
 open ~/Desktop/md_test_results.html
 ```
 
+The example above uses realitive paths with a "glob" that will match mdx in all subfolders below the script. This means you can do isolated testing of a given product by moving the script. We can flesh this out into an argument system in the future. 
+
 > Could be implemented as `Rakefile` in the future. 
