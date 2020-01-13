@@ -1,4 +1,4 @@
-#!/usr/bin/env inspec exec 
+#!/usr/bin/env inspec exec -t docker://hashi_inspec --reporter html:~/Desktop/md_test_results.html
 # http://www.anniehedgie.com/inspec-basics-1
 # https://lollyrock.com/posts/inspec-for-docker
 require 'kramdown'
