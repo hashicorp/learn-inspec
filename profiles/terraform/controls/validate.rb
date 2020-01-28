@@ -42,7 +42,7 @@ markdown_files.each do |file|
             content:  section.value
           }
           describe terraform(options) do
-              it { should be_initialized }
+              #it { should be_initialized }
               it { should be_valid }
           end
         end

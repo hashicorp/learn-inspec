@@ -1,68 +1,37 @@
-# Steps to reproduce POC
+# Overview
 
-Disclaimer: Ruby applications on macOS can be difficult to distribute across multiple versions. I have hedged my bets with the instructions below. The final tooling would likely use a docker in docker approach if possible.
+This repo contains [inspec](https://www.inspec.io/) integration with the learn platform. It uses docker to run inspec. Tests/Controls are __automatically generated__ by extracting fenced code blocks from the markdown (mdx). Each test then runs against an addtional docker container via docker in docker. You can customize the environment of this "target" with real world environmental variables such as AWS Keys to do live tests with example code. You can modify this indprv target with stand-in files or modified configurations by rebuilding the target docker container. 
 
-## Setup Docker Container
-Clone this gist and cd to its directory. Build the docker image containing all products to test. 
+# Usage
 
-```shell
-git clone git@gist.github.com:b8739a3cf4fea5591c8e041c35510b9f.git
-cd b8739a3cf4fea5591c8e041c35510b9f
-docker build -t hashi_inspec .
-```
+Executing this requires two containers. The first container is not required but is provided as low price of admission in terms of ruby management.
 
-> Just using the public containers for the POC as they can be combined atm with little effort.
 
-Open a seperate terminal window to run the container
+## Launching the inspec-target container
+
+In a new terminal window , run the launch script below. This script will build the `inspec-target` container and run an interactive shell in that container. This interactive shell must be running for inspec to connect to the container. This shell can then be used to manually debug failed tests by allowing you to reproduce the error in identical conditions.
 
 ```shell
-# If this is your second run through
-docker rm -f hashi_inspec
-docker run -e VAULT_ADDR='http://127.0.0.1:8200' --name hashi_inspec -it hashi_inspec
+./target/launch.sh
 ```
-This will open an interactive shell to the container to allow debugging. 
 
-> Note the ability to add environmental variables which can interact with our code examples. 
+> Do not close this window and proceed to the next step.
 
-## Setup Inspec
+## Launching the inspec container
 
-### Optional: Install ruby via rbenv
-This was tested under ruby 2.5.1 for backward compatiblity. You may skip these steps if your version is greater then that.However you may reference them if you have issues with macOS's system ruby. This guide assumes you have installed and configured [Home Brew](https://brew.sh/) as its beyond the scope of this document. 
+Inspec can run tests against your local branch of the learn repo. You must provide the path to the root of your local learn repo with `-d`.
+You can then pass which product you wish to run tests against with. These product names corrispond to inspec [profiles](https://www.inspec.io/docs/reference/profiles/)
+
 
 ```shell
-brew install rbenv
-rbenv install 2.5.1
-rbenv shell 2.5.1
+./extract_and_run.sh -p terraform -d ~/src/learn
 ```
 
-### Setup your ruby environment
+### Support profiles
 
-If your using system ruby or once you have configured rbenv use the following to install the required gems. 
 
-```shell
-gem install kramdown
-gem install kramdown-parser-gfm
-gem install inspec
-gem install inspec-bin
-```
+| Profile       | Supported     | Notes                                                                                                |
+| ------------- |:-------------:| ----------------------------------------------------------------------------------------------------:|
+| terraform     | yes           | Extracts all hcl codeblocks in pages/terraform and runs `terraform validate` against them |
 
-If you have issues, copy the `Gemfile` from this post and run `bundle install` and use `bundle exec` to run `inspec`
-
-> It might be worth looking into chefdk for portablity. 
-
-### Generate an inspec report
-
-Once you have the required gems you can execute the tests in this directory by copying `code_blocks.rb` to the `pages` directory of your local [learn](https://github.com/hashicorp/learn) check out. 
-
-To generate the [html output](https://drive.google.com/file/d/16EOMZyt76KCLsISZmGGRjEG_VS-oUtyw/view?usp=sharing):
-
-```shell
-cp code_blocks.rb ~/src/learn/pages
-cd ~/src/learn/pages
-inspec exec code_blocks.rb -t docker://hashi_inspec --reporter html:~/Desktop/md_test_results.html
-open ~/Desktop/md_test_results.html
-```
-
-The example above uses realitive paths with a "glob" that will match mdx in all subfolders below the script. This means you can do isolated testing of a given product by moving the script. We can flesh this out into an argument system in the future. 
-
-> Could be implemented as `Rakefile` in the future. 
+> `terraform` validates syntax by passing each block as stdin.
