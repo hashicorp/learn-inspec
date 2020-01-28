@@ -31,18 +31,7 @@ markdown_files.each do |file|
       when :codeblock
         case section.options[:lang]
         when 'hcl'
-          format = [
-            index,
-            File.basename(file),
-            section.options[:location],
-            (section.options[:location] + section.value.lines.to_a.count)
-          ]
-          options = {
-            filename: "%i_%s#%i-%i.tf" % format,
-            content:  section.value
-          }
-          describe terraform(options) do
-              #it { should be_initialized }
+          describe terraform(hcl: section.value) do
               it { should be_valid }
           end
         end

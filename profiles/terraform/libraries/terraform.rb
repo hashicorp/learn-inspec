@@ -5,7 +5,7 @@ class Terraform < Inspec.resource(1)
   desc 'A wrapper to create & destroy a tf file'
  
   example "
-      describe terraform(filename: 'example.tf',content: '...') do
+      describe terraform(content: '...') do
         it { should be_initialized }
         it { should be_valid }
       end
@@ -14,9 +14,8 @@ class Terraform < Inspec.resource(1)
   attr_reader :name, :filename 
 
 
-  def initialize(opts = {})
-    @filename = opts[:filename]
-    @content  = opts[:content]
+  def initialize(hcl:)
+    @content  = hcl 
   end
 
   def initialized?
