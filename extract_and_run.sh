@@ -45,7 +45,8 @@ inspec check "profiles/${PROFILE:?"Pass with -p"}" &&
   inspec exec "profiles/${PROFILE}" \
       --target=docker://inspec-target \
       --reporter cli html:"${HTML_REPORT:?}" \
-      --log-level=debug
+      --log-level=debug \
+      --show-progress
 
 [ -f "$HTML_REPORT" ] && open "$HTML_REPORT"
 

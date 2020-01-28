@@ -24,7 +24,7 @@ class Terraform < Inspec.resource(1)
   end
 
   def valid?
-    terraform_command('validate')
+    terraform_command('fmt')
   end
   
   def method_missing(name)
@@ -35,7 +35,7 @@ class Terraform < Inspec.resource(1)
 
   def terraform_command(action)
     result = inspec.command("echo \'#{@content}\' |
-                   TF_IN_AUTOMATION=yes terraform #{action}").result
+                   TF_IN_AUTOMATION=yes terraform #{action} -").result
     exit_status = result.exit_status
     if exit_status.zero?
       exit_status.zero?
