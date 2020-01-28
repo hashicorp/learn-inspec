@@ -1,0 +1,9 @@
+---
+name: terraform 
+title: Terraform profile 
+maintainer: Zack Smith
+copyright: Hashicorp Inc.
+copyright_email: zsmith@hashicorp.com
+license: Apache-2.0
+summary: This profile generates controls from terraform codeblocks in markdown 
+version: 1.0.0

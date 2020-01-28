@@ -1,13 +1,10 @@
-FROM hashicorp/terraform:latest as terraform
-FROM hashicorp/packer:latest as packer
-FROM consul as consul
-FROM djenriquez/nomad as nomad
-FROM vault:latest as vault
-COPY --from=terraform / /
-COPY --from=packer / /
-COPY --from=consul / /
-COPY --from=nomad / /
+FROM ruby:2.5.1
+
+WORKDIR /
+
+COPY Gemfile /
+RUN bundle install
 
 COPY . /
-ENTRYPOINT ["/bin/sh"]
-
+ENV CHEF_LICENSE accept-silent
+ENTRYPOINT ["bundle", "exec", "inspec"]
