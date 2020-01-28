@@ -1,0 +1,9 @@
+---
+name: vault 
+title: Vault profile 
+maintainer: Zack Smith
+copyright: Hashicorp Inc.
+copyright_email: zsmith@hashicorp.com
+license: Apache-2.0
+summary: This profile runs all commands found in the vault directory 
+version: 1.0.0

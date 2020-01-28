@@ -5,7 +5,7 @@ class Terraform < Inspec.resource(1)
   desc 'A wrapper to create & destroy a tf file'
  
   example "
-      describe terraform(content: '...') do
+      describe terraform(hcl: '...') do
         it { should be_initialized }
         it { should be_valid }
       end
