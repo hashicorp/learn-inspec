@@ -1,0 +1,14 @@
+---
+name: all 
+title: Test all of learn 
+maintainer: Zack Smith
+copyright: Hashicorp Inc.
+copyright_email: zsmith@hashicorp.com
+license: Apache-2.0
+summary: This runs all profiles 
+version: 1.0.0
+depends:
+  - name: vault
+    path: ../vault
+  - name: terraform 
+    path: ../terraform

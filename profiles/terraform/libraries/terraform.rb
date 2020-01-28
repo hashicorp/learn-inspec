@@ -40,7 +40,7 @@ class Terraform < Inspec.resource(1)
       exit_status.zero?
     else
       raise Inspec::Exceptions::ResourceFailed,
-        "Command failed: \n #{@content} #{result.stderr} #{result.stdout}"
+        "Terraform validate failed: \n #{@content} #{result.stderr} #{result.stdout}"
     end
   end
 end

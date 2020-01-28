@@ -1,0 +1,13 @@
+---
+lockfile_version: 1
+depends:
+- name: vault
+  resolved_source:
+    path: "/Users/zack/src/learn-inspec/profiles/vault"
+    sha256: 459ab31758b0b944068a023e3e81986ddf022205e9b06d0beab97cc56e62058e
+  version_constraints: []
+- name: terraform
+  resolved_source:
+    path: "/Users/zack/src/learn-inspec/profiles/terraform"
+    sha256: c112d37df163166267c1f40cbba27dae9e89a5e360b1e176cefeb9aedede6054
+  version_constraints: []

@@ -34,6 +34,14 @@ markdown_files.each do |file|
           describe terraform(hcl: section.value) do
               it { should be_valid }
           end
+        when 'json'
+           describe json(value: section.value) do
+               it { should be_valid }
+           end
+         when 'shell'
+            describe shell(value: section.value) do
+                it { should be_valid }
+            end
         end
       end
     end
