@@ -1,4 +1,7 @@
+
 class Terraform < Inspec.resource(1)
+
+  require 'shellwords'
 
   name 'terraform'
  
@@ -33,7 +36,7 @@ class Terraform < Inspec.resource(1)
   private
 
   def terraform_command(action)
-    result = inspec.command("echo \'#{@content}\' |
+    result = inspec.command("echo #{Shellwords.escape(@content)} |
                    TF_IN_AUTOMATION=yes terraform #{action} -").result
     exit_status = result.exit_status
     if exit_status.zero?
