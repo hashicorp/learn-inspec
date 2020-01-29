@@ -32,8 +32,8 @@ You can then pass which product you wish to run tests against with. These produc
 
 
 | Profile       | Supported     | Notes                                                                                                |
-| ------------- |:-------------:| ----------------------------------------------------------------------------------------------------:|
-| terraform     | yes           | Extracts all hcl codeblocks in pages/terraform and runs `terraform validate` against them |
-| vault         | yes           | Extracts all json codeblocks in pages/vault and validates json with ruby |
+| ------------- |:-------------:| -----------------------------------------------:|
+| terraform     | yes           | Extracts all hcl,shell,json and vaklidates them |
+| vault         | yes           | Extracts all shell,json validates them          |
 
 > `terraform` validates syntax by passing each block as stdin via `terraform fmt -`.
