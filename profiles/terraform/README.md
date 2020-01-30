@@ -1,3 +1,5 @@
-# Terraform
+# Usage
 
-This profile extracts markdown code blocks and runs terraform validate (using terraform fmt)
+```shell
+ ./extract_and_run.sh -p terraform -d ~/src/learn
+```
