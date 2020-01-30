@@ -33,8 +33,8 @@ In a new terminal window , run the `./extract_and_run.sh` script shown below. Th
 
 
 | Profile       | Supported     | Notes                                                                                                |
-| ------------- |:-------------:| -----------------------------------------------:|
-| terraform     | yes           | Extracts all hcl,shell,json and vaklidates them |
-| vault         | yes           | Extracts all shell,json validates them          |
+| ------------- |:-------------:| ------------------------------------------------------------------:|
+| terraform     | yes           | Extracts all `hcl`, `shell`, `json` codeblocks and validates them |
+| vault         | yes           | Extracts all `shell`, `json` codeblocks validates them             |
 
 > `terraform` validates syntax by passing each block as stdin via `terraform fmt -`.
