@@ -1,0 +1,9 @@
+---
+name: nomad 
+title: Nomad profile 
+maintainer: Zack Smith
+copyright: Hashicorp Inc.
+copyright_email: zsmith@hashicorp.com
+license: Apache-2.0
+summary: This profile runs all commands found in the nomad directory 
+version: 1.0.0
