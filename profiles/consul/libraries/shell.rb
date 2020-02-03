@@ -1,5 +1,7 @@
 class Shell < Inspec.resource(1)
 
+  require 'shellwords'
+
   name 'shell'
  
   desc 'Syntax checker for json'
@@ -45,7 +47,7 @@ class Shell < Inspec.resource(1)
     raise Inspec::Exceptions::ResourceSkipped,
       "Unable to parse shell: \n #{value}" if command.nil?
 
-    result = inspec.command("echo \'#{command.sub!(/^\$/, '')}\' | sh -n").result
+    result = inspec.command("echo #{Shellwords.escape(command.sub!(/^\$/, ''))} | sh -n").result
     exit_status = result.exit_status
     if exit_status.zero?
       exit_status.zero?
