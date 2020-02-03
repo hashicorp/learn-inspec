@@ -12,3 +12,7 @@ depends:
     path: ../vault
   - name: terraform 
     path: ../terraform
+  - name: nomad 
+    path: ../nomad
+  - name: consul 
+    path: ../consul
