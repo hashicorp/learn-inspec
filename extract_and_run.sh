@@ -41,10 +41,6 @@ make
 
 # Run inspec
 
-# Currently the all profile requires vendoring
-[ "${PROFILE:?"Pass with -p"}" == 'all' ] &&
-    inspec vendor --overwrite "profiles/all"
-
 # You can put "command" in front of this to run outside of docker
 inspec check "profiles/${PROFILE:?"Pass with -p"}" &&
   inspec exec "profiles/${PROFILE}" \
