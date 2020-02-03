@@ -39,9 +39,13 @@ markdown_files.each do |file|
                it { should be_valid }
            end
          when 'shell'
-            describe shell(value: section.value) do
-                it { should be_valid }
-            end
+           describe shell(value: section.value) do
+               it { should be_valid }
+           end
+         when 'yaml'
+           describe yaml(value: section.value) do
+               it { should be_valid }
+           end
         end
       end
     end
