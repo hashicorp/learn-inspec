@@ -35,6 +35,8 @@ In a new terminal window , run the `./extract_and_run.sh` script shown below. Th
 ./extract_and_run.sh -p consul -d ~/src/learn
 ```
 
+> You can run all profiles with git status `-p all`
+
 ### Support profiles
 
 
