@@ -31,6 +31,7 @@ In a new terminal window , run the `./extract_and_run.sh` script shown below. Th
 ./extract_and_run.sh -p terraform -d ~/src/learn
 ./extract_and_run.sh -p vault -d ~/src/learn
 ./extract_and_run.sh -p nomad -d ~/src/learn
+./extract_and_run.sh -p consul -d ~/src/learn
 ```
 
 ### Support profiles
