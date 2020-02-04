@@ -10,7 +10,7 @@ This repo contains [inspec](https://www.inspec.io/) integration with the [learn]
 
 # Usage
 
-Executing this requires two containers. The first container is not required but is provided to minimize workstation requirements.a
+Executing this requires two containers. The first container is not required but is provided to minimize workstation requirements.
 
 
 ## Launching the inspec-target container
