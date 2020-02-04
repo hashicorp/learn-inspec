@@ -4,7 +4,7 @@ class Shell < Inspec.resource(1)
 
   name 'shell'
  
-  desc 'Syntax checker for json'
+  desc 'Syntax checker for shell'
  
   example "
       describe shell(value: '...') do
