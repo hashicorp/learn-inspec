@@ -4,7 +4,7 @@ class Shell < Inspec.resource(1)
 
   name 'shell'
  
-  desc 'Syntax checker for json'
+  desc 'Syntax checker for shell'
  
   example "
       describe shell(value: '...') do
@@ -34,6 +34,9 @@ class Shell < Inspec.resource(1)
     elsif lines[0][0] == '$'
       # Handle singleline commands
       parsed_command = lines[0]
+    elsif lines[0][0] == '#'
+      # Handle comment at begining of code block
+      parsed_command = lines[1]
     end
 
     parsed_command
@@ -47,7 +50,7 @@ class Shell < Inspec.resource(1)
     raise Inspec::Exceptions::ResourceSkipped,
       "Unable to parse shell: \n #{value}" if command.nil?
 
-    result = inspec.command("echo #{Shellwords.escape(command.sub!(/^\$/, ''))} | sh -n").result
+    result = inspec.command("echo #{Shellwords.escape(command.sub!(/^.*\$/, ''))} | sh -n").result
     exit_status = result.exit_status
     if exit_status.zero?
       exit_status.zero?
