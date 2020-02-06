@@ -21,10 +21,10 @@ markdown_files.each do |file|
     ref File.basename(file),
       url: 'https://github.com/hashicorp/learn/blob/master/#{file.split("/").drop(1).join("/")}'
 
-    # Sanity check
-    only_if("#{file} does not contain front matter with #{PRODUCTS_USED}") do
-      (front_matter['products_used'] & PRODUCTS_USED).any?
-    end
+    ## Sanity check
+    #only_if("#{file} does not contain front matter with #{PRODUCTS_USED}") do
+    #  (front_matter['products_used'] & PRODUCTS_USED).any?
+    #end
 
     # Parse the markdown
     markdown = Kramdown::Document.new(File.read(file), input: 'GFM')
