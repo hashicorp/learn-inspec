@@ -1,0 +1,12 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.5.1 
+  steps:
+    - checkout
+    - setup_remote_docker
+    - run:
+        name: 
+        command: |
+          git clone https://github.com/hashicorp/learn.git learn
