@@ -13,7 +13,11 @@ class Json < Inspec.resource(1)
   attr_reader :name
 
   def initialize(value:)
-    @value  = value 
+    @value  = value
+    if value.match(/\.\.\./)
+      return skip_resource \
+        "Skipping test: cannot validate json with ellipsis: \n #{value}"
+    end
   end
 
   def valid?
