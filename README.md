@@ -10,7 +10,7 @@ This repo contains [inspec](https://www.inspec.io/) integration with the [learn]
 
 # Usage
 
-Executing this code requires two containers. The first container is not required but is provided to minimize workstation requirements.
+Executing this code requires two containers. The inspec container is not actually required but is provided to minimize workstation requirements.
 
 
 ## Launching the inspec-target container
@@ -36,7 +36,7 @@ In a new terminal window , run the `./extract_and_run.sh` script shown below. Th
 ```
 
 > You can run all profiles with `-p all`
-
+> You can pipe the output with color with `| less -r`
 ### Support profiles
 
 
