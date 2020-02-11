@@ -22,7 +22,7 @@ class Shell < Inspec.resource(1)
     if @command.nil?
       return skip_resource \
         "Unable to parse shell command, codeblock lang mismatch? \n #{value}"
-    elsif @command.match(/(<\w+>|\.\.\.)/)
+    elsif @command.match(/(<\w+.*\w+?>|\.\.\.)/)
       return skip_resource \
         "Skipping test: Pseudo variable or ellipses detected \n #{value}"
     end
