@@ -3,9 +3,12 @@ require 'getoptlong'
 require 'kramdown'
 require 'yaml'
 
-PRODUCTS_USED = ['Nomad','Nomad Enterprise']
+$config  = YAML.load(File.read("#{__dir__}/config.yaml"))
 
-markdown_files = Dir.glob("/learn/pages/nomad/**/*.mdx")
+PRODUCTS_USED = $config['products_used']
+
+markdown_files = Dir.glob($config['markdown_path'])
+
 
 raise "No markdown files found!" if markdown_files.count.zero?
 
@@ -39,13 +42,13 @@ markdown_files.each do |file|
               it { should be_valid }
           end
         when 'shell'
-          describe shell(value: section.value) do
+          describe shell(value: section.value, replacements: $config['replacements'] ) do
               it { should be_valid }
           end
-         when 'yaml'
-           describe yaml(value: section.value) do
-               it { should be_valid }
-           end
+        when 'yaml'
+          describe yaml(value: section.value) do
+              it { should be_valid }
+          end
         end
       end
     end

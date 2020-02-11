@@ -3,11 +3,12 @@ require 'getoptlong'
 require 'kramdown'
 require 'yaml'
 
-PRODUCTS_USED = ['Vault','Vault Enterprise']
+$config  = YAML.load(File.read("#{__dir__}/config.yaml"))
 
-markdown_files = Dir.glob("/learn/pages/vault/**/*.mdx")
+PRODUCTS_USED = $config['products_used']
 
-replacements = YAML.load(File.read("#{__dir__}/replace.yaml"))
+markdown_files = Dir.glob($config['markdown_path'])
+
 
 raise "No markdown files found!" if markdown_files.count.zero?
 
@@ -41,7 +42,7 @@ markdown_files.each do |file|
               it { should be_valid }
           end
         when 'shell'
-          describe shell(value: section.value, replacements: replacements ) do
+          describe shell(value: section.value, replacements: $config['replacements'] ) do
               it { should be_valid }
           end
         when 'yaml'

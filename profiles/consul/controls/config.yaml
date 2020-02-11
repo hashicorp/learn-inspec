@@ -1,0 +1,5 @@
+---
+products_used: ['Consul','Consul Enterprise'] 
+markdown_path: '/learn/pages/consul/**/*.mdx' 
+replacements:
+  '<TOKEN>': 's.KkNJYWF6g0pomcCLEmDdOVCW'

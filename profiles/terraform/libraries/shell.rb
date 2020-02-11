@@ -14,15 +14,15 @@ class Shell < Inspec.resource(1)
 
   attr_reader :name
 
-  def initialize(value:)
+  def initialize(value: ,replacements:)
     @value   = value
-    @command = parse_command(value)
+    @command = parse_command(replace_pseudo(value,replacements))
 
     # Skip criteria
     if @command.nil?
       return skip_resource \
         "Unable to parse shell command, codeblock lang mismatch? \n #{value}"
-    elsif @command.match(/(<\w+>|\.\.\.)/)
+    elsif @command.match(/(<\w+.*\w+?>|\.\.\.)/)
       return skip_resource \
         "Skipping test: Pseudo variable or ellipses detected \n #{value}"
     end
@@ -30,6 +30,10 @@ class Shell < Inspec.resource(1)
 
   def valid?
     validate_shell(@value,@command) 
+  end
+
+  def replace_pseudo(value,replacements)
+    value.gsub(/<\w+.*\w+?>/,replacements)
   end
 
   def parse_escaped_lines(escaped_lines,lines)
@@ -52,12 +56,12 @@ class Shell < Inspec.resource(1)
     parsed_command.join
 
   rescue ArgumentError => e
-    if lines.scan(/^.*\$/).count > 1
+    if lines.join.scan(/^.*\$/).count > 1
       raise Inspec::Exceptions::ResourceFailed,
         "Multiple commands in a single block detected: \n #{lines.join}"
     else
-       raise Inspec::Exceptions::ResourceFailed,
-         "#{e.message} \n Unable to recontruct the full command: \n #{escaped_lines.join} from \n #{lines.join}"
+       raise Inspec::Exceptions::ResourceSkipped,
+         "Unable to recontruct the full command: \n #{escaped_lines.join} from \n #{lines.join}\n The Error was #{e.message}"
     end
   end
 

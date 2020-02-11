@@ -1,0 +1,5 @@
+---
+products_used: ['Terraform','Terraform Enterprise']
+markdown_path: '/learn/pages/terraform/**/*.mdx' 
+replacements:
+  '<TOKEN>': 's.KkNJYWF5g0pomcCLEmDdOVCW'

@@ -1,0 +1,5 @@
+---
+products_used: ['Nomad','Nomad Enterprise'] 
+markdown_path: '/learn/pages/nomad/**/*.mdx'
+replacements:
+  '<TOKEN>': 's.KkNJYWF5g0pomcCLEmDdOVCW'
