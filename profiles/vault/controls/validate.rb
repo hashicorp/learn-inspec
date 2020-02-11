@@ -7,6 +7,8 @@ PRODUCTS_USED = ['Vault','Vault Enterprise']
 
 markdown_files = Dir.glob("/learn/pages/vault/**/*.mdx")
 
+replacements = YAML.load(File.read("#{__dir__}/replace.yaml"))
+
 raise "No markdown files found!" if markdown_files.count.zero?
 
 # Enumerate our markdown files
@@ -39,7 +41,7 @@ markdown_files.each do |file|
               it { should be_valid }
           end
         when 'shell'
-          describe shell(value: section.value) do
+          describe shell(value: section.value, replacements: replacements ) do
               it { should be_valid }
           end
         when 'yaml'
