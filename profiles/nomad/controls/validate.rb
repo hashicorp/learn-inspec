@@ -26,7 +26,11 @@ markdown_files.each do |file|
 
     # Sanity check
     only_if("#{file} does not contain front matter with #{PRODUCTS_USED}") do
-      (front_matter['products_used'] & PRODUCTS_USED).any?
+      products_used = (front_matter['products_used'] & PRODUCTS_USED)
+      # The var evals to false with no front matter.
+      # If its not false then check if any of the products match our config
+      products_used &&
+        products_used.any?
     end
 
     # Parse the markdown
