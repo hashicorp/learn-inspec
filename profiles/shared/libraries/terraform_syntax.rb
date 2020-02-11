@@ -1,15 +1,14 @@
 
-class Terraform < Inspec.resource(1)
+class TerraformSyntax < Inspec.resource(1)
 
   require 'shellwords'
 
-  name 'terraform'
+  name 'terraform_syntax'
  
   desc 'A wrapper to create & destroy a tf file'
  
   example "
-      describe terraform(hcl: '...') do
-        it { should be_initialized }
+      describe terraform_syntax(hcl: '...') do
         it { should be_valid }
       end
   "

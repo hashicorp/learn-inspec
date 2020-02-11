@@ -1,11 +1,11 @@
-class Json < Inspec.resource(1)
+class JsonSyntax < Inspec.resource(1)
 
-  name 'json'
+  name 'json_syntax'
  
   desc 'Syntax checker for json'
  
   example "
-      describe json(value: '...') do
+      describe json_syntax(value: '...') do
         it { should be_valid }
       end
   "

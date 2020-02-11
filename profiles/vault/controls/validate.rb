@@ -38,15 +38,15 @@ markdown_files.each do |file|
       when :codeblock
         case section.options[:lang]
         when 'json'
-          describe json(value: section.value) do
+          describe json_syntax(value: section.value) do
               it { should be_valid }
           end
         when 'shell'
-          describe shell(value: section.value, replacements: $config['replacements'] ) do
+          describe shell_syntax(value: section.value, replacements: $config['replacements'] ) do
               it { should be_valid }
           end
         when 'yaml'
-          describe yaml(value: section.value) do
+          describe yaml_syntax(value: section.value) do
               it { should be_valid }
           end
         end

@@ -1,13 +1,13 @@
-class Shell < Inspec.resource(1)
+class ShellSyntax < Inspec.resource(1)
 
   require 'shellwords'
 
-  name 'shell'
+  name 'shell_syntax'
  
   desc 'Syntax checker for shell'
  
   example "
-      describe shell(value: '...') do
+      describe shell_syntax(value: '...', replacements: '...'') do
         it { should be_valid }
       end
   "
@@ -60,8 +60,14 @@ class Shell < Inspec.resource(1)
       raise Inspec::Exceptions::ResourceFailed,
         "Multiple commands in a single block detected: \n #{lines.join}"
     else
-       raise Inspec::Exceptions::ResourceSkipped,
-         "Unable to recontruct the full command: \n #{escaped_lines.join} from \n #{lines.join}\n The Error was #{e.message}"
+      # Our library can't split an incomplete line
+      # So stub it out and try again if we failed to parse
+      #return parse_escaped_lines(escaped_lines, lines) \
+      #  if e.message.match(/Unmatched double quote/)
+      raise Inspec::Exceptions::ResourceSkipped,
+        "Unable to recontruct the full command: \
+          #{escaped_lines.join} from \n #{lines.join} \
+          The Error was #{e.message} \n #{e.backtrace}"
     end
   end
 
@@ -82,7 +88,6 @@ class Shell < Inspec.resource(1)
       parsed_command = lines[1].lstrip
     elsif lines[0].lstrip[0] == '/'
       # Handle docker exec style prompts
-      # TODO: Make this a global change?
       parsed_command = lines[0].lstrip.sub(%r{^/}, '').lstrip
     end
 

@@ -1,11 +1,11 @@
-class Yaml < Inspec.resource(1)
+class YamlSyntax < Inspec.resource(1)
 
-  name 'yaml'
+  name 'yaml_syntax'
  
   desc 'Syntax checker for yaml'
  
   example "
-      describe yaml(value: '...') do
+      describe yaml_syntax(value: '...') do
         it { should be_valid }
       end
   "

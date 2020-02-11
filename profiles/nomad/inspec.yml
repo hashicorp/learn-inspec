@@ -7,3 +7,6 @@ copyright_email: zsmith@hashicorp.com
 license: Apache-2.0
 summary: This profile runs all commands found in the nomad directory 
 version: 1.0.0
+depends:
+  - name: shared
+    path: ../shared
