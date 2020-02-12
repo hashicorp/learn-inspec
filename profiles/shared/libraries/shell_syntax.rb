@@ -105,8 +105,10 @@ class ShellSyntax < Inspec.resource(1)
     raise Inspec::Exceptions::ResourceSkipped,
       "Unable to parse shell: \n #{value}" if command.nil?
 
-    result = inspec.command("echo #{Shellwords.escape(command.sub!(/^\w*\$/,''))} | sh -n").result
+    result = inspec.command(
+      "echo #{Shellwords.escape(command.sub!(/^\w*\$/,''))} | sh -n").result
     exit_status = result.exit_status
+
     if exit_status.zero?
       exit_status.zero?
     else
