@@ -41,14 +41,20 @@ class ShellSyntax < Inspec.resource(1)
     last_line = lines.at(escaped_lines.count)
 
     # Break our codeblock out as a shellwords array
-    shellwords         = lines.join.shellsplit
+    shellwords         = lines.join(' ').shellsplit
 
     # Create a similar break out for just the escaped lines 
-    escaped_shellwords = escaped_lines.join.shellsplit
+    escaped_shellwords = escaped_lines.join(' ').shellsplit
 
     # When the two don't match we likely have addtional parsing needed.
     if escaped_shellwords.last != shellwords.at(escaped_shellwords.count - 1)
-      parsed_command = escaped_lines.append(shellwords.at(escaped_shellwords.count - 1).shellescape)
+      index = escaped_shellwords.count - 1
+
+      parsed_command = escaped_lines.append(
+        shellwords.at(
+          index
+        ).shellescape
+      )
     else
       parsed_command = escaped_lines.append(last_line)
     end
@@ -60,10 +66,9 @@ class ShellSyntax < Inspec.resource(1)
       raise Inspec::Exceptions::ResourceFailed,
         "Multiple commands in a single block detected: \n #{lines.join}"
     else
-      # Our library can't split an incomplete line
-      # So stub it out and try again if we failed to parse
-      #return parse_escaped_lines(escaped_lines, lines) \
-      #  if e.message.match(/Unmatched double quote/)
+      # If we can't parse the entry , assume the whole block is the command
+      return lines.join \
+        if e.message.match(/Unmatched double quote/)
       raise Inspec::Exceptions::ResourceSkipped,
         "Unable to recontruct the full command: \
           #{escaped_lines.join} from \n #{lines.join} \
@@ -100,7 +105,7 @@ class ShellSyntax < Inspec.resource(1)
     raise Inspec::Exceptions::ResourceSkipped,
       "Unable to parse shell: \n #{value}" if command.nil?
 
-    result = inspec.command("echo #{Shellwords.escape(command.sub!(/^.*$/,''))} | sh -n").result
+    result = inspec.command("echo #{Shellwords.escape(command.sub!(/^\w*\$/,''))} | sh -n").result
     exit_status = result.exit_status
     if exit_status.zero?
       exit_status.zero?
