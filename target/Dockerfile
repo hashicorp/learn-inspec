@@ -9,5 +9,7 @@ COPY --from=consul / /
 COPY --from=nomad / /
 
 COPY . /
+RUN apk add --no-cache bash
+
 ENTRYPOINT ["/bin/sh"]
 

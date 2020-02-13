@@ -106,7 +106,7 @@ class ShellSyntax < Inspec.resource(1)
       "Unable to parse shell: \n #{value}" if command.nil?
 
     result = inspec.command(
-      "echo #{Shellwords.escape(command.sub!(/^\w*\$/,''))} | sh -n").result
+      "echo #{Shellwords.escape(command.sub!(/^\w*\$/,''))} | bash -n").result
     exit_status = result.exit_status
 
     if exit_status.zero?
