@@ -1,9 +1,10 @@
+IMAGE="inspec-target"
 build:
 	@echo "==> Building Docker image..."
 	@docker build \
         --rm \
         -t \
-        inspec-target \
+        $(IMAGE) \
         .
 
 .DEFAULT_GOAL := build 

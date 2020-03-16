@@ -11,5 +11,4 @@ COPY --from=nomad / /
 COPY . /
 RUN apk add --no-cache bash
 
-ENTRYPOINT ["/bin/sh"]
-
+ENTRYPOINT ["tail", "-f", "/dev/null"]

@@ -1,0 +1,23 @@
+---
+# This is the Github action code used for CI runs
+name: 'Check for invalid syntax'
+author: "Zack Smith"
+description: 'Ensure code blocks syntax is correct'
+inputs:
+  profile:
+    description: 'The profile to run'
+    required: false
+    default: 'all'
+outputs:
+  inspec-output:
+    description: 'The output of inspec'
+runs:
+  using: 'docker'
+  image: 'Dockerfile.dind'
+  env:
+    PROFILE: ${{ inputs.profile }}
+  entrypoint: "/usr/local/bin/docker-compose"
+  args: "up"
+branding:
+  color: "black"
+  icon: "dollar-sign"

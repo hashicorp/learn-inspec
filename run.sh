@@ -3,7 +3,7 @@
 # Run our ruby environment in docker for portablity
 function inspec() {
   docker run \
-    -v "${LEARN_DIR:?"Pass with -d"}":/learn \
+    -v "${LEARN_DIR:?"Pass with -d"}":/markdown \
     -v /tmp:/tmp \
     -v /var/run/docker.sock:/var/run/docker.sock \
     inspec \
@@ -29,7 +29,6 @@ while getopts "d:p:h" opt; do
   esac
 done
 
-HTML_REPORT="/tmp/inspec-$RANDOM$$.html"
 
 # Allow us to call script from any pwd
 SCRIPT_DIR="${0%/*}"
@@ -39,7 +38,15 @@ cd "$SCRIPT_DIR"
 # Build our inspec container
 make
 
+# Run the target container
+declare -xi TARGET_RUNNING=$(docker ps | grep -c inspec-target)
+
+if [[ ${TARGET_RUNNING} == 0 ]] ; then
+   ./target/background.sh
+fi
+
 # Run inspec
+HTML_REPORT="/tmp/inspec-$RANDOM$$.html"
 
 # You can put "command" in front of this to run outside of docker
 inspec check "profiles/${PROFILE:?"Pass with -p"}" &&
@@ -51,3 +58,4 @@ inspec check "profiles/${PROFILE:?"Pass with -p"}" &&
 
 [ -f "$HTML_REPORT" ] && open "$HTML_REPORT"
 
+docker kill inspec-target

@@ -9,7 +9,7 @@ COPY . /
 
 ENV CHEF_LICENSE accept-silent
 
-RUN for profile in profiles/*/ ; \
+RUN for profile in ../profiles/*/ ; \
       do bundle exec inspec vendor --overwrite $profile ; \
     done
 
