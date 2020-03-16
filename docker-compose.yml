@@ -6,7 +6,6 @@ services:
     build: ./target
   inspec:
     container_name: "inspec"
-    context: .
     build:
       context: .
       dockerfile: Dockerfile.inspec
