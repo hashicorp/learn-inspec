@@ -19,7 +19,6 @@ runs:
   entrypoint: "/usr/local/bin/docker-compose"
   args:
     - "up"
-  working-directory: ${{ github.workspace }}
 branding:
   color: "black"
   icon: "dollar-sign"
