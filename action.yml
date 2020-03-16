@@ -13,12 +13,13 @@ outputs:
     description: 'The output of inspec'
 runs:
   using: 'docker'
-  image: './Dockerfile.dind'
+  image: 'dind/Dockerfile'
   env:
     PROFILE: ${{ inputs.profile }}
   entrypoint: "/usr/local/bin/docker-compose"
   args:
     - "up"
+  working-directory: ${{ github.workspace }}
 branding:
   color: "black"
   icon: "dollar-sign"
