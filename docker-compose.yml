@@ -16,6 +16,7 @@ services:
       - 'exec'
       - 'profiles/${PROFILE:?}'
       - '--target=docker://inspec-target'
-      - '--reporter cli'
+      - '--reporter'
+      - 'cli'
       - '--log-level=debug'
       - '--show-progress'
