@@ -21,6 +21,8 @@ runs:
     - "--file"
     - "/stack/docker-compose.yml"
     - "up"
+    - "--exit-code-from"
+    - "inspec"
 branding:
   color: "black"
   icon: "dollar-sign"
