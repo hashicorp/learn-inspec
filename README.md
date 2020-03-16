@@ -39,14 +39,3 @@ In a new terminal window , run the `./run.sh` script shown below. The code extra
 
 > `terraform` validates syntax by passing each block as stdin via `terraform fmt -`.
 
-## Launching the inspec-target container interactively
-
-If you wish to debug failures of the inspec tests you may wish to manually run the syntax commands on the target container.
-First run the `interactive.sh` script shown below. This script will build an `inspec-target` container and run an interactive shell in that container. This interactive shell must be running for inspec to connect to the        container. This shell can also be used to debug failed tests conditions.
-
-```shell
-./target/interactive.sh
-```
-
- > :exclamation: Do not close this window and proceed to the next step.
- 
