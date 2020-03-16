@@ -1,13 +1,21 @@
-IMAGE="inspec"
+IMAGE="dind"
 
-build:
+dind:
 	@echo "==> Building Docker image..."
 	@docker build \
         --rm \
         -t \
         $(IMAGE) \
         .
+inspec:
+	@echo "==> Building Docker image..."
+	@docker build \
+        --rm \
+        -t \
+		--file Dockerfile.inspec \
+        inspec \
+        .
 
-.DEFAULT_GOAL := build 
+.DEFAULT_GOAL := inspec 
 
-.PHONY: build
+.PHONY: build inspec

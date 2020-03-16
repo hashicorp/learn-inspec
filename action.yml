@@ -13,7 +13,7 @@ outputs:
     description: 'The output of inspec'
 runs:
   using: 'docker'
-  image: 'dind/Dockerfile'
+  image: 'Dockerfile'
   env:
     PROFILE: ${{ inputs.profile }}
   entrypoint: "/usr/local/bin/docker-compose"

@@ -6,7 +6,8 @@ services:
     build: ./target
   inspec:
     container_name: "inspec"
-    build: .
+    context: .
+    dockerfile: Dockerfile.inspec
     volumes:
       - /github/workspace:/markdown
       - /var/run/docker.sock:/var/run/docker.sock

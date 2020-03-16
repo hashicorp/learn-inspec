@@ -1,4 +1,4 @@
-IMAGE="dind"
+IMAGE="inspec"
 
 build:
 	@echo "==> Building Docker image..."
