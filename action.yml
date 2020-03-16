@@ -18,6 +18,8 @@ runs:
     PROFILE: ${{ inputs.profile }}
   entrypoint: "/usr/local/bin/docker-compose"
   args:
+    - "--file"
+    - "/stack/docker-compose.yml"
     - "up"
 branding:
   color: "black"

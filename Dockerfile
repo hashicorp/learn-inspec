@@ -24,4 +24,4 @@ RUN echo "Install base dependencies" && \
     chmod 0755 /usr/local/bin/docker-compose
 
 WORKDIR /
-COPY . .
+COPY . stack 
