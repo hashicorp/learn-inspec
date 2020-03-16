@@ -19,7 +19,7 @@ runs:
   entrypoint: "/usr/local/bin/docker-compose"
   args:
     - "--file"
-    - "/gitub/workspace/docker-compose.yml"
+    - "/github/workspace/docker-compose.yml"
     - "up"
 branding:
   color: "black"
