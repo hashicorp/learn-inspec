@@ -17,7 +17,8 @@ runs:
   env:
     PROFILE: ${{ inputs.profile }}
   entrypoint: "/usr/local/bin/docker-compose"
-  args: "up"
+  args:
+    - "up"
 branding:
   color: "black"
   icon: "dollar-sign"
