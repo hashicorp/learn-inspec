@@ -6,7 +6,8 @@ services:
     build: ./target
   inspec:
     container_name: "inspec"
-    depends_on: "inspec-target"
+    depends_on:
+      - "inspec-target"
     build:
       context: .
       dockerfile: Dockerfile.inspec
