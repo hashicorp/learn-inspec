@@ -27,6 +27,8 @@ runs:
     - "up"
     - "--exit-code-from"
     - "inspec"
+    - "--log-level"
+    - "DEBUG"
 branding:
   color: "black"
   icon: "dollar-sign"
