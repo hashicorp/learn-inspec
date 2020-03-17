@@ -10,7 +10,7 @@ PRODUCTS_USED = $config['products_used']
 markdown_files = Dir.glob($config['markdown_path'])
 
 
-raise "No markdown files found!" if markdown_files.count.zero?
+raise "No markdown files found! #{Dir.glob("/markdown/*").inspect}" if markdown_files.count.zero?
 
 # Enumerate our markdown files
 markdown_files.each do |file|
