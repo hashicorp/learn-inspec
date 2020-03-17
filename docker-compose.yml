@@ -12,7 +12,7 @@ services:
       context: .
       dockerfile: Dockerfile.inspec
     volumes:
-      - /github/workspace/markdown:/markdown
+      - "${MARKDOWN}:/markdown"
       - /var/run/docker.sock:/var/run/docker.sock
     command:
       - 'exec'

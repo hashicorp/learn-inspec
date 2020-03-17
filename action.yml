@@ -8,6 +8,9 @@ inputs:
     description: 'The profile to run'
     required: false
     default: 'all'
+  markdown:
+    description: 'The directory containing the markdown'
+    required: true
 outputs:
   inspec-output:
     description: 'The output of inspec'
@@ -16,6 +19,7 @@ runs:
   image: 'Dockerfile'
   env:
     PROFILE: ${{ inputs.profile }}
+    MARKDOWN: ${{ inputs.markdown }}
   entrypoint: "/usr/local/bin/docker-compose"
   args:
     - "--file"
