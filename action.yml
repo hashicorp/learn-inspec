@@ -24,11 +24,11 @@ runs:
   args:
     - "--file"
     - "/stack/docker-compose.yml"
+     - "--log-level"
+     - "DEBUG"
     - "up"
     - "--exit-code-from"
     - "inspec"
-    - "--log-level"
-    - "DEBUG"
 branding:
   color: "black"
   icon: "dollar-sign"
