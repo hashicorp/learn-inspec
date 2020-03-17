@@ -24,8 +24,8 @@ runs:
   args:
     - "--file"
     - "/stack/docker-compose.yml"
-     - "--log-level"
-     - "DEBUG"
+    - "--log-level"
+    - "DEBUG"
     - "up"
     - "--exit-code-from"
     - "inspec"
