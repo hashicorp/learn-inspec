@@ -1,5 +1,5 @@
 ---
 products_used: ['Vault','Vault Enterprise']
-markdown_path: '/markdown/pages/vault/**/*.mdx' 
+markdown_glob: 'pages/vault/**/*.mdx' 
 replacements:
   '<TOKEN>': 's.KkNJYWF5g0pomcCLEmDdOVCW'

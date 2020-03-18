@@ -1,5 +1,5 @@
 ---
 products_used: ['Nomad','Nomad Enterprise'] 
-markdown_path: '/markdown/pages/nomad/**/*.mdx'
+markdown_glob: 'pages/nomad/**/*.mdx'
 replacements:
   '<TOKEN>': 's.KkNJYWF5g0pomcCLEmDdOVCW'

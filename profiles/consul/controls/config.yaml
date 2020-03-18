@@ -1,6 +1,6 @@
 ---
 products_used: ['Consul','Consul Enterprise'] 
-markdown_path: '/markdown/pages/consul/**/*.mdx' 
+markdown_glob: 'pages/consul/**/*.mdx' 
 replacements:
   '<your-BIG-IP-mgmt-ip>': '10.1.2.3'
   '<your-consul-ip>': '10.1.2.4'
