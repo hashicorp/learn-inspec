@@ -3,6 +3,7 @@
 # Run our ruby environment in docker for portablity
 function inspec() {
   docker run \
+    -e MARKDOWN=/markdown \
     -v "${LEARN_DIR:?"Pass with -d"}":/markdown \
     -v /tmp:/tmp \
     -v /var/run/docker.sock:/var/run/docker.sock \
