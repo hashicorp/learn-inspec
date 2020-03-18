@@ -12,7 +12,9 @@ services:
       context: .
       dockerfile: Dockerfile.inspec
     volumes:
-      - ${MARKDOWN:?Markdown Directory Missing}:/markdown
+      - type: bind
+        source: ${MARKDOWN:?Markdown Directory Missing} 
+        target: /markdown
       - /var/run/docker.sock:/var/run/docker.sock
     command:
       - 'exec'
