@@ -25,6 +25,7 @@ runs:
     - '--target=docker://inspec-target'
     - '--reporter'
     - 'cli'
+    - 'html:inspec.html'
     - '--log-level=debug'
     - '--show-progress'
     - '--no-color'
