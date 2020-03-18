@@ -27,6 +27,7 @@ runs:
     - 'cli'
     - '--log-level=debug'
     - '--show-progress'
+    - '--no-color'
 branding:
   color: "black"
   icon: "dollar-sign"
