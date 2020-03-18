@@ -21,6 +21,7 @@ runs:
     PROFILE: ${{ inputs.profile }}
     MARKDOWN: ${{ inputs.markdown }}
   entrypoint: "/usr/local/bin/docker-compose"
+  options: -v ${{ inputs.markdown }}:/markdown
   args:
     - "--file"
     - "/stack/docker-compose.yml"
