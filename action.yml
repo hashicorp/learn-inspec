@@ -1,8 +1,8 @@
 ---
 # This is the Github action code used for CI runs
-name: 'Check for invalid syntax'
+name: 'Check markdown codeblocks'
 author: "Zack Smith"
-description: 'Ensure code blocks syntax is correct'
+description: 'Run inspec against markdown'
 inputs:
   profile:
     description: 'The profile to run'
@@ -18,17 +18,15 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   env:
-    PROFILE: ${{ inputs.profile }}
     MARKDOWN: ${{ inputs.markdown }}
-  entrypoint: "/usr/local/bin/docker-compose"
   args:
-    - "--file"
-    - "/stack/docker-compose.yml"
-    - "--log-level"
-    - "DEBUG"
-    - "up"
-    - "--exit-code-from"
-    - "inspec"
+    - 'exec'
+    - profiles/${{ inputs.profile }}
+    - '--target=docker://inspec-target'
+    - '--reporter'
+    - 'cli'
+    - '--log-level=debug'
+    - '--show-progress'
 branding:
   color: "black"
   icon: "dollar-sign"
