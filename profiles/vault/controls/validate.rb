@@ -7,7 +7,7 @@ $config  = YAML.load(File.read("#{__dir__}/config.yaml"))
 
 PRODUCTS_USED = $config['products_used']
 
-markdown_files = Dir.glob("#{ENV['MARKDOWN']}/#{$config['markdown_glob']}")
+markdown_files = Dir.glob($config['markdown_glob'])
 
 raise "No markdown files found!" if markdown_files.count.zero?
 
