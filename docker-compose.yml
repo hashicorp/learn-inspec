@@ -12,7 +12,7 @@ services:
       context: .
       dockerfile: Dockerfile.inspec
     volumes:
-      - markdown:/markdown
+      - ${MARKDOWN:?Markdown Directory Missing}:/markdown
       - /var/run/docker.sock:/var/run/docker.sock
     command:
       - 'exec'
@@ -22,10 +22,3 @@ services:
       - 'cli'
       - '--log-level=debug'
       - '--show-progress'
-volumes:
-  markdown:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ${MARKDOWN:?Markdown Directory Missing}
