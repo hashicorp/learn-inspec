@@ -21,7 +21,7 @@ runs:
     MARKDOWN: ${{ inputs.markdown }}
   args:
     - 'exec'
-    - profiles/${{ inputs.profile }}
+    - /profiles/${{ inputs.profile }}
     - '--target=docker://inspec-target'
     - '--reporter'
     - 'cli'
