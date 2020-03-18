@@ -28,4 +28,5 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: ${MARKDOWN:?Markdown Directory Missing} 
+      device: ${MARKDOWN:?Markdown Directory Missing}
+      name: markdown
