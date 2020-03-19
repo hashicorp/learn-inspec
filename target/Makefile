@@ -13,6 +13,7 @@ build:
 	 -t \
 	 $(IMAGE_NAME) \
 	 .
+push:
 	@docker tag $(call GetImageID,$(IMAGE_NAME)) \
 	  $(DOCKER_USERNAME)/$(IMAGE_NAME):latest
 	@docker push \
@@ -20,4 +21,4 @@ build:
 
 .DEFAULT_GOAL := build
 
-.PHONY: build
+.PHONY: build push

@@ -7,14 +7,25 @@ $config  = YAML.load(File.read("#{__dir__}/config.yaml"))
 
 PRODUCTS_USED = $config['products_used']
 
- markdown_files = Dir.glob("#{ENV['MARKDOWN']}/#{$config['markdown_glob']}")
+markdown_files = Dir.glob("#{ENV['MARKDOWN']}/#{$config['markdown_glob']}")
 
-raise "No markdown files found!" if markdown_files.count.zero?
+
+raise "No markdown files found!}" if markdown_files.count.zero?
+
+include_controls "shared"
+
+if PRODUCTS_USED.include?("Terraform")
+   require_resource(profile: 'terraform',
+                    resource: 'terraform_syntax',
+                    as: 'hcl_syntax')
+end
+
 
 # Enumerate our markdown files
 markdown_files.each do |file|
     # Load the front matter (no parsing needed)
   front_matter = YAML.load_file(file)
+
   control file do
     impact 1.0
     title front_matter['name']
@@ -45,12 +56,22 @@ markdown_files.each do |file|
               it { should be_valid }
           end
         when 'shell'
-          describe shell_syntax(value: section.value, replacements: $config['replacements'] ) do
+          describe shell_syntax(value: section.value, replacements: input("replacements") ) do
               it { should be_valid }
           end
         when 'yaml'
           describe yaml_syntax(value: section.value) do
               it { should be_valid }
+          end
+        when 'hcl'
+          if PRODUCTS_USED.include?("Terraform")
+            describe terraform_syntax(hcl: section.value) do
+                it { should be_valid }
+            end
+          else 
+            describe hcl_syntax(hcl: section.value) do
+                it { should be_valid }
+            end
           end
         end
       end

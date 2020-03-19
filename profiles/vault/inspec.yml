@@ -10,3 +10,8 @@ version: 1.0.0
 depends:
   - name: shared
     path: ../shared
+inputs:
+  - name: replacements
+    type: hash
+    value:
+      '<TOKEN>': 's.KkNJYWF5g0pomcCLEmDdOVCW'

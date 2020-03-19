@@ -1,6 +1,4 @@
-
 class TerraformSyntax < Inspec.resource(1)
-
   require 'shellwords'
 
   name 'terraform_syntax'
