@@ -10,7 +10,7 @@ PRODUCTS_USED = $config['products_used']
 markdown_files = Dir.glob("#{ENV['MARKDOWN']}/#{$config['markdown_glob']}")
 
 
-raise "No markdown files found! #{Dir.glob("/markdown/*").inspect}" if markdown_files.count.zero?
+raise "No markdown files found!}" if markdown_files.count.zero?
 
 # Enumerate our markdown files
 markdown_files.each do |file|
@@ -33,6 +33,11 @@ markdown_files.each do |file|
         products_used.any?
     end
 
+    if PRODUCTS_USED.include?("Terraform")
+       require_resource(profile: 'shared', resource: 'terraform_syntax',
+                   as: 'hcl_syntax')
+    end
+
     # Parse the markdown
     markdown = Kramdown::Document.new(File.read(file), input: 'GFM')
     
@@ -46,11 +51,15 @@ markdown_files.each do |file|
               it { should be_valid }
           end
         when 'shell'
-          describe shell_syntax(value: section.value, replacements: $config['replacements'] ) do
+          describe shell_syntax(value: section.value, replacements: input("replacements") ) do
               it { should be_valid }
           end
         when 'yaml'
           describe yaml_syntax(value: section.value) do
+              it { should be_valid }
+          end
+        when 'hcl'
+          describe hcl_syntax(hcl: section.value) do
               it { should be_valid }
           end
         end

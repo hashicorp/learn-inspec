@@ -1,8 +1,3 @@
 ---
 products_used: ['Consul','Consul Enterprise'] 
 markdown_glob: 'pages/consul/**/*.mdx' 
-replacements:
-  '<your-BIG-IP-mgmt-ip>': '10.1.2.3'
-  '<your-consul-ip>': '10.1.2.4'
-  '<your-BIG-IP-virtual-ip>': '10.1.2.5'
-  '<your-authorization-header>' : 'YWxhZGRpbjpvcGVuc2VzYW1l'

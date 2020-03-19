@@ -15,7 +15,7 @@ docker rm -f inspec-target &>/dev/null
 # Override the infinate entry point so users
 # can do an interactive debug session with sh
 docker run \
-    --entrypoint '/bin/sh'
+    --entrypoint '/bin/sh' \
     -e VAULT_ADDR='http://127.0.0.1:8200' \
     --name inspec-target \
     -ti inspec-target
