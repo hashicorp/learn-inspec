@@ -32,6 +32,8 @@ runs:
     - 'html:inspec.html'
     - '--show-progress'
     - '--no-color'
+    - '--input-file'
+    - '/input.yml'
 branding:
   color: "black"
   icon: "dollar-sign"
