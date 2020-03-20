@@ -30,7 +30,6 @@ runs:
     - '--reporter'
     - 'cli'
     - 'html:inspec.html'
-    - '--log-level=debug'
     - '--show-progress'
     - '--no-color'
 branding:
