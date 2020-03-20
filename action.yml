@@ -11,6 +11,9 @@ inputs:
   markdown:
     description: 'The directory containing the markdown'
     required: true
+  github_token:
+    description: 'Github token used by github profile'
+    required: true
 outputs:
   inspec-output:
     description: 'The output of inspec'
@@ -19,7 +22,7 @@ runs:
   image: 'Dockerfile'
   env:
     MARKDOWN: ${{ inputs.markdown }}
-    GITHUB_TOKEN: ${{ secrets.github_token }}
+    GITHUB_TOKEN: ${{ inputs.github_token }}
   args:
     - 'exec'
     - /profiles/${{ inputs.profile }}
