@@ -3,7 +3,7 @@
 ![Diagram](/images/diagram.png)
 
 
-This repo contains [inspec](https://www.inspec.io/) integration with the [learn](https://github.com/hashicorp/learn) platform. It uses docker to run inspec. Tests/Controls are __automatically generated__ by extracting fenced code blocks from the markdown (mdx). Each test then runs against an target docker container via docker in docker. You can customize the environment of this "target" with real world environmental variables such as AWS Keys to do live tests with example code. You can modify this target with stand-in configurations by rebuilding the target docker container. 
+This repo contains [inspec](https://www.inspec.io/) integration with the [learn](https://github.com/hashicorp/learn) platform. It uses docker to run inspec. Tests/Controls are __automatically generated__ by extracting fenced code blocks from the markdown (mdx). Each test then runs against an target docker container via a mounted docker socket. You can customize the environment of this "target" with real world environmental variables such as AWS Keys to do live tests with example code. You can modify this target with stand-in configurations by rebuilding the target docker container. 
 
 > Currently these tests run syntax checks against terraform hcl, json and shell.
 > See the [RFC](https://docs.google.com/document/d/1TgyrGkmdr4FCyLHN9OKYR2bEMNlJIFNS8QhQyTBXDlg/edit#) for an explanation of active vs passive testing.
