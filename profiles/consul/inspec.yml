@@ -11,9 +11,6 @@ depends:
   - name: shared 
     path: ../shared
 inputs:
-  - name: product 
-    type: string
-    value: consul
   - name: replacements 
     type: hash 
     value:
