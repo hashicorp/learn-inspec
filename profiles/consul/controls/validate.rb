@@ -45,7 +45,6 @@ markdown_files.each do |file|
         products_used.any?
     end
 
-    raise ("FOOO: #{input('files_to_check')}")
     # Parse the markdown
     markdown = Kramdown::Document.new(File.read(file), input: 'GFM')
     
