@@ -19,6 +19,7 @@ runs:
   image: 'Dockerfile'
   env:
     MARKDOWN: ${{ inputs.markdown }}
+    GITHUB_TOKEN: ${{ secrets.github_token }}
   args:
     - 'exec'
     - /profiles/${{ inputs.profile }}
