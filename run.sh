@@ -3,6 +3,10 @@
 # Run our ruby environment in docker for portablity
 function inspec() {
   docker run \
+    -e GITHUB_ACTIONS=true \
+    -e GITHUB_REF='refs/heads/nomad/gs/install' \
+    -e GITHUB_REPOSITORY='hashicorp/learn' \
+    -e GITHUB_TOKEN \
     -e MARKDOWN=/markdown \
     -v "${LEARN_DIR:?"Pass with -d"}":/markdown \
     -v /tmp:/tmp \
@@ -55,8 +59,7 @@ inspec check "profiles/${PROFILE:?"Pass with -p"}" &&
       --target=docker://inspec-target \
       --reporter cli html:"${HTML_REPORT:?}" \
       --log-level=debug \
-      --show-progress
-
-[ -f "$HTML_REPORT" ] && open "$HTML_REPORT"
+      --show-progress &&
+        open "$HTML_REPORT"
 
 docker kill inspec-target

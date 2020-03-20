@@ -1,3 +1,2 @@
 ---
-products_used: ['Consul','Consul Enterprise'] 
 markdown_glob: 'pages/consul/**/*.mdx' 

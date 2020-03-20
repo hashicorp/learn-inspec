@@ -16,3 +16,7 @@ depends:
     path: ../nomad
   - name: consul 
     path: ../consul
+inputs:
+  - name: files_to_check
+    type: array
+    value: []

@@ -5,8 +5,8 @@ maintainer: Zack Smith
 copyright: Hashicorp Inc.
 copyright_email: zsmith@hashicorp.com
 license: Apache-2.0
-summary: This profile runs all commands found in the consul directory 
-version: 1.0.0
+summary: This profile runs syntax checks for markdown in the consul directory 
+version: 2.0.0
 depends:
   - name: shared 
     path: ../shared
@@ -21,3 +21,9 @@ inputs:
       '<your-consul-ip>': '10.1.2.4'
       '<your-BIG-IP-virtual-ip>': '10.1.2.5'
       '<your-authorization-header>' : 'YWxhZGRpbjpvcGVuc2VzYW1l'
+  - name:  products_used
+    type: array
+    value: ['Consul','Consul Enterprise'] 
+  - name: files_to_check
+    value: []
+    profile: all

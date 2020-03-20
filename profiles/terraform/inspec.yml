@@ -6,7 +6,7 @@ copyright: Hashicorp Inc.
 copyright_email: zsmith@hashicorp.com
 license: Apache-2.0
 summary: This profile generates controls from terraform codeblocks in markdown 
-version: 1.0.0
+version: 2.0.0
 depends:
   - name: shared
     path: ../shared
@@ -15,3 +15,9 @@ inputs:
     type: hash
     value:
       '<TOKEN>': 's.KkNJYWF5g0pomcCLEmDdOVCW'
+  - name:  products_used
+    type: array
+    value: ['Terraform','Terraform Enterprise']
+  - name: files_to_check 
+    value: []
+    profile: all

@@ -1,3 +1,2 @@
 ---
-products_used: ['Vault','Vault Enterprise']
 markdown_glob: 'pages/vault/**/*.mdx' 

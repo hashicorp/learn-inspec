@@ -5,17 +5,29 @@ require 'yaml'
 
 $config  = YAML.load(File.read("#{__dir__}/config.yaml"))
 
-PRODUCTS_USED = $config['products_used']
-
-markdown_files = Dir.glob("#{ENV['MARKDOWN']}/#{$config['markdown_glob']}")
-
+markdown_files = if input('files_to_check').empty?
+                   Dir.glob("#{ENV['MARKDOWN']}/#{$config['markdown_glob']}")
+                 else
+                   # This will return the intersection of the two arrays
+                   Dir.glob("#{ENV['MARKDOWN']}/#{$config['markdown_glob']}") && input('files_to_check')
+                 end
 
 raise "No markdown files found!}" if markdown_files.count.zero?
+
+include_controls "shared"
+
+# TODO: Can't use this as inspec.command doesn't work as inspec in nil
+# See if statement below, should track down why this doesn't work
+#   require_resource(profile: 'terraform',
+#                    resource: 'terraform_syntax',
+#                    as: 'hcl_syntax')
+
 
 # Enumerate our markdown files
 markdown_files.each do |file|
     # Load the front matter (no parsing needed)
   front_matter = YAML.load_file(file)
+
   control file do
     impact 1.0
     title front_matter['name']
@@ -25,17 +37,12 @@ markdown_files.each do |file|
       url: 'https://github.com/hashicorp/learn/blob/master/#{file.split("/").drop(1).join("/")}'
 
     # Sanity check
-    only_if("#{file} does not contain front matter with #{PRODUCTS_USED}") do
-      products_used = (front_matter['products_used'] & PRODUCTS_USED)
+    only_if("#{file} does not contain front matter with #{input('products_used')}") do
+      products_used = (front_matter['products_used'] & input('products_used'))
       # The var evals to false with no front matter.
       # If its not false then check if any of the products match our config
       products_used &&
         products_used.any?
-    end
-
-    if PRODUCTS_USED.include?("Terraform")
-       require_resource(profile: 'shared', resource: 'terraform_syntax',
-                   as: 'hcl_syntax')
     end
 
     # Parse the markdown
@@ -59,8 +66,15 @@ markdown_files.each do |file|
               it { should be_valid }
           end
         when 'hcl'
-          describe hcl_syntax(hcl: section.value) do
-              it { should be_valid }
+          # I should be able to use require_resource above but it doesn't work
+          if input('products_used').include?("Terraform")
+            describe terraform_syntax(hcl: section.value) do
+                it { should be_valid }
+            end
+          else 
+            describe hcl_syntax(hcl: section.value) do
+                it { should be_valid }
+            end
           end
         end
       end

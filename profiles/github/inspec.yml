@@ -1,0 +1,23 @@
+---
+name: github 
+title: Github Actions Profile 
+maintainer: Zack Smith
+copyright: Hashicorp Inc.
+copyright_email: zsmith@hashicorp.com
+license: Apache-2.0
+summary: This profile dynamically loads controls based on commit changes 
+version: 1.0.0
+depends:
+  - name: all
+    path: ../all
+inputs:
+  - name: product
+    type: string
+    value: consul
+  - name: replacements
+    type: hash
+    value:
+      '<your-BIG-IP-mgmt-ip>': '10.1.2.3'
+      '<your-consul-ip>': '10.1.2.4'
+      '<your-BIG-IP-virtual-ip>': '10.1.2.5'
+      '<your-authorization-header>' : 'YWxhZGRpbjpvcGVuc2VzYW1l'

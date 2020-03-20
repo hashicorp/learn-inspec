@@ -1,16 +1,39 @@
-#!/usr/bin/env ruby 
+if ENV['GITHUB_ACTIONS'] != 'true'
+  raise "This profile is only meant to be used with Github Actions"
+end
+
+require 'octokit'
+require 'cgi'
 require 'getoptlong'
 require 'kramdown'
 require 'yaml'
 
-$config  = YAML.load(File.read("#{__dir__}/config.yaml"))
+github = Octokit::Client.new(:access_token => ENV['GITHUB_TOKEN'])
+puts "Running under Github Actions"
 
-markdown_files = if input('files_to_check').empty?
-                   Dir.glob("#{ENV['MARKDOWN']}/#{$config['markdown_glob']}")
-                 else
-                   # This will return the intersection of the two arrays
-                   Dir.glob("#{ENV['MARKDOWN']}/#{$config['markdown_glob']}") && input('files_to_check')
-                 end
+repository     = ENV['GITHUB_REPOSITORY']
+
+branch         = CGI.escape(ENV['GITHUB_REF'].sub('refs/heads/',''))
+
+feature_branch = github.ref(repository,
+                            "heads/#{branch}")
+master_branch  = github.ref(repository,
+                            'heads/master')
+comparison        = github.compare(repository,
+                                feature_branch.object.sha,
+                                master_branch.object.sha)
+
+# Sanity check
+if comparison.status == "identical"
+  puts "Commits are identical"
+  skip_control 'all' 
+end
+
+files_to_check = comparison.files.select do |file|
+  file.status == 'added' or file.status == 'modified'
+end.map{|file| "#{ENV['MARKDOWN']}/#{file.filename}"}
+
+markdown_files = Dir.glob("#{ENV['MARKDOWN']}/pages/**/*.mdx") && files_to_check 
 
 raise "No markdown files found!}" if markdown_files.count.zero?
 
@@ -36,19 +59,9 @@ markdown_files.each do |file|
     ref File.basename(file),
       url: 'https://github.com/hashicorp/learn/blob/master/#{file.split("/").drop(1).join("/")}'
 
-    # Sanity check
-    only_if("#{file} does not contain front matter with #{input('products_used')}") do
-      products_used = (front_matter['products_used'] & input('products_used'))
-      # The var evals to false with no front matter.
-      # If its not false then check if any of the products match our config
-      products_used &&
-        products_used.any?
-    end
-
-    raise ("FOOO: #{input('files_to_check')}")
     # Parse the markdown
     markdown = Kramdown::Document.new(File.read(file), input: 'GFM')
-    
+
     markdown.root.children.each_with_index do |section,index|
       case section.type
       # Parse the codeblocks
@@ -67,15 +80,8 @@ markdown_files.each do |file|
               it { should be_valid }
           end
         when 'hcl'
-          # I should be able to use require_resource above but it doesn't work
-          if input('products_used').include?("Terraform")
-            describe terraform_syntax(hcl: section.value) do
-                it { should be_valid }
-            end
-          else 
-            describe hcl_syntax(hcl: section.value) do
-                it { should be_valid }
-            end
+          describe hcl_syntax(hcl: section.value) do
+              it { should be_valid }
           end
         end
       end
