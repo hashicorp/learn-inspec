@@ -19,7 +19,7 @@ outputs:
     description: 'The output of inspec'
 runs:
   using: 'docker'
-  image: 'Dockerfile'
+  image: 'docker://acidprime/learn-inspec' 
   env:
     MARKDOWN: ${{ inputs.markdown }}
     GITHUB_TOKEN: ${{ inputs.github_token }}

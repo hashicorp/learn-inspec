@@ -1,13 +1,24 @@
-IMAGE="inspec"
+IMAGE_NAME="inspec"
+DOCKER_USERNAME=acidprime
+
+define GetImageID
+  `docker images --filter=reference=$(1) --format "{{.ID}}"`
+endef
 
 build:
 	@echo "==> Building Docker image..."
 	@docker build \
-        --rm \
-        -t \
-        $(IMAGE) \
-        .
+	 --rm \
+	 -t \
+	 $(IMAGE_NAME) \
+	 .
+push:
+	@docker login -u $(DOCKER_USERNAME)
+	@docker tag $(call GetImageID,$(IMAGE_NAME)) \
+	  $(DOCKER_USERNAME)/$(IMAGE_NAME):latest
+	@docker push \
+	        $(DOCKER_USERNAME)/$(IMAGE_NAME):latest
 
-.DEFAULT_GOAL := build 
+.DEFAULT_GOAL := build
 
-.PHONY: build
+.PHONY: build push
