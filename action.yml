@@ -31,6 +31,7 @@ runs:
     - 'cli'
     - 'html:inspec.html'
     - '--show-progress'
+    - '--no-color'
     - '--input-file'
     - '/input.yml'
 branding:
