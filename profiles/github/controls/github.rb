@@ -20,8 +20,8 @@ feature_branch = github.ref(repository,
 master_branch  = github.ref(repository,
                             'heads/master')
 comparison        = github.compare(repository,
-                                feature_branch.object.sha,
-                                master_branch.object.sha)
+                                master_branch.object.sha,
+                                feature_branch.object.sha)
 
 # Sanity check
 if comparison.status == "identical"
