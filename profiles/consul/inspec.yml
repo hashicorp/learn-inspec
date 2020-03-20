@@ -26,4 +26,3 @@ inputs:
     value: ['Consul','Consul Enterprise'] 
   - name: files_to_check
     value: []
-    profile: all
