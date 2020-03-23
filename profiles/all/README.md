@@ -1,9 +1,9 @@
 # Run all tests 
 
-Runs all vendored included profiles
+Runs all product profiles. 
 
 ## Usage
 
 ```shell
-./extract_and_run.sh -d ~/src/learn -p all
+./run.sh -d ~/src/learn -p all
 ```

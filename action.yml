@@ -1,5 +1,7 @@
 ---
 # This is the Github action code used for CI runs
+# The input system will in the future allow more then learn
+# to be targeted by the profiles in this directory.
 name: 'Check markdown codeblocks'
 author: "Zack Smith"
 description: 'Run inspec against markdown'

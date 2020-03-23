@@ -1,3 +1,6 @@
+# This make file builds and pushes the container
+# The Github Action uses the container not the Dockerfile 
+# to increase the speed of running the tests.
 IMAGE_NAME="inspec"
 DOCKER_USERNAME=acidprime
 

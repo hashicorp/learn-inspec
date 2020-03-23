@@ -1,4 +1,4 @@
-# Shared skeleton
+# Shared Profile
 
 Mainly used for shared custom resources
 
