@@ -1,6 +1,11 @@
-# Usage
+# Overview
 
 This directory contains a docker image that is used as a target for the inspec tests.
+
+
+## Usage
+
+This container is automatically provisioned when run via the `run.sh` script using the `make` command. This container can also be manually spun up to allow for debugging failing tests. 
 
 ## Launching the inspec-target container interactively
 
