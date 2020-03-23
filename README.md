@@ -48,3 +48,9 @@ In a terminal window , run the `./run.sh` script shown below. The code extracts 
 | all           | For use with the `./run.sh` script. Runs all product profiles                                            |
 | shared        | Used to store shared custom resources for inspec [libraries](profiles/shared/libraries)                  |
 | github        | Used with Github Action, expects `GITHUB` environment vars for commit lookup                             |
+
+# Support Files
+
+## [`input.yml`](input.yml)
+
+This file contains inputs to (globally) to the inspec profiles. It currently is used by `shell_syntax` custom resource to do dynamic replacments for placeholders in the code. This replacements hash allows us to run syntax checks on commands that otherwise would be invalid syntax with the placeholder.
