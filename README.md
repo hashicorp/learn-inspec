@@ -1,7 +1,8 @@
 # Overview
 
+<center>
 ![Diagram](/images/diagram.png)
-
+</center>
 
 This repo contains [inspec](https://www.inspec.io/) integration with the [learn](https://github.com/hashicorp/learn) platform. It uses docker to run inspec. Tests/Controls are __automatically generated__ by extracting fenced code blocks from the markdown (mdx). Each test then runs against an target docker container via a mounted docker socket. You can customize the environment of this "target" with real world environmental variables such as AWS Keys to do live tests with example code. You can modify this target with stand-in configurations by rebuilding the target docker container. 
 
@@ -10,12 +11,15 @@ This repo contains [inspec](https://www.inspec.io/) integration with the [learn]
 
 # Usage
 
-Executing this code requires two containers. The inspec container is not actually required but is provided to minimize workstation requirements.
+Executing this code requires two containers. The inspec container is not actually required but is provided to minimize workstation requirements. The `inspec-target` is automatically spun up. You can also run it interactivly to debug using `./target/interactive.sh`
 
+# Requirements
 
-## Running the tests on learn.hashicorp.com 
+Docker is required, you can download it [here](https://hub.docker.com/editions/community/docker-ce-desktop-mac).
 
-In a new terminal window , run the `./run.sh` script shown below. The code extracts markdown content from your local checkout/branch of the learn repo. You must provide the path to the root of your local learn repo with `-d`. You can then pass which product you wish to run tests against with. These product names correspond to inspec [profiles](https://www.inspec.io/docs/reference/profiles/)
+## Executing a inspec profile 
+
+In a terminal window , run the `./run.sh` script shown below. The code extracts markdown content from your local checkout/branch of the learn repo. You must provide the path to the root of your local learn repo with `-d`. You can then pass which product you wish to run tests against with. These product names correspond to inspec [profiles](https://www.inspec.io/docs/reference/profiles/)
 
 
 ```shell
@@ -27,15 +31,22 @@ In a new terminal window , run the `./run.sh` script shown below. The code extra
 
 > You can run all profiles with `-p all`
 > You can pipe the output with color with `| less -r`
-### Support profiles
+### Product profiles
 
 
-| Profile       | Supported     | Notes                                                                         |
-| ------------- |:-------------:| -----------------------------------------------------------------------------:|
-| terraform     | yes           | Extracts all `hcl`, `shell`, `json` and `yaml` codeblocks and validates them  |
-| vault         | yes           | Extracts all `shell`, `json` and `yaml` codeblocks validates them             |
-| nomad         | yes           | Extracts all `shell`, `json` and `yaml` codeblocks validates them             |
-| consul        | yes           | Extracts all `shell`, `json` and `yaml` codeblocks validates them             |
+| Profile       | Notes                                                                         |
+| ------------- | -----------------------------------------------------------------------------:|
+| terraform     | Extracts all `hcl`, `shell`, `json` and `yaml` codeblocks and validates them  |
+| vault         | Extracts all `shell`, `json` and `yaml` codeblocks validates them             |
+| nomad         | Extracts all `shell`, `json` and `yaml` codeblocks validates them             |
+| consul        | Extracts all `shell`, `json` and `yaml` codeblocks validates them             |
 
 > `terraform` validates syntax by passing each block as stdin via `terraform fmt -`.
 
+### Utility profiles
+
+| Profile       | Notes                                                                         |
+| ------------- | -----------------------------------------------------------------------------:|
+| all           | For use with the `./run.sh` script. Runs all product profiles                 |
+| shared        | Used to store shared custom resources for inspec (libraries)                  |
+| github        | Used with Github Action, expects `GITHUB` environment vars for commit lookup  |
