@@ -9,7 +9,7 @@ This repo contains [inspec](https://www.inspec.io/) integration with the [learn]
 
 # Usage
 
-Executing this code requires two containers. The inspec container is not actually required but is provided to minimize workstation requirements. The `inspec-target` is automatically spun up. You can also run it interactivly to debug using `./target/interactive.sh`
+Executing this code requires two containers. The inspec container is not actually required but is provided to minimize workstation requirements. The `inspec-target` is automatically spun up. You can also run it interactivly to debug using [`./target/interactive.sh`](target/interactive.sh)
 
 # Requirements
 
@@ -32,24 +32,28 @@ In a terminal window , run the `./run.sh` script shown below. The code extracts 
 ### Product profiles
 
 
-| Profile       | Notes                                                                         |
-| ------------- | -----------------------------------------------------------------------------:|
-| terraform     | Extracts all `hcl`, `shell`, `json` and `yaml` codeblocks and validates them  |
-| vault         | Extracts all `shell`, `json` and `yaml` codeblocks validates them             |
-| nomad         | Extracts all `shell`, `json` and `yaml` codeblocks validates them             |
-| consul        | Extracts all `shell`, `json` and `yaml` codeblocks validates them             |
+| Profile                            | Notes                                                                         |
+| ---------------------------------- | -----------------------------------------------------------------------------:|
+| [terraform](profile/terraform)     | Extracts all `hcl`, `shell`, `json` and `yaml` codeblocks and validates them  |
+| [vault](profile/vault)             | Extracts all `shell`, `json` and `yaml` codeblocks validates them             |
+| [nomad](profile/nomad)             | Extracts all `shell`, `json` and `yaml` codeblocks validates them             |
+| [consul](profile/consul)           | Extracts all `shell`, `json` and `yaml` codeblocks validates them             |
 
 > `terraform` validates syntax by passing each block as stdin via `terraform fmt -`.
 
 ### Utility profiles
 
-| Profile       | Notes                                                                                                    |
-| ------------- | --------------------------------------------------------------------------------------------------------:|
-| all           | For use with the `./run.sh` script. Runs all product profiles                                            |
-| shared        | Used to store shared custom resources for inspec [libraries](profiles/shared/libraries)                  |
-| github        | Used with Github Action, expects `GITHUB` environment vars for commit lookup                             |
+| Profile                  | Notes                                                                                                    |
+| ------------------------ | --------------------------------------------------------------------------------------------------------:|
+| [all](profile/all)       | For use with the `./run.sh` script. Runs all product profiles                                            |
+| [shared](profile/shared) | Used to store shared custom resources for inspec [libraries](profiles/shared/libraries)                  |
+| [github](profile/github) | Used with Github Action, expects `GITHUB` environment vars for commit lookup                             |
 
 # Support Files
+
+## [`run.sh`](run.sh)
+
+This script is used by authors and developers to run the tests locally.
 
 ## [`input.yml`](input.yml)
 
