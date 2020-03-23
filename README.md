@@ -43,8 +43,8 @@ In a terminal window , run the `./run.sh` script shown below. The code extracts 
 
 ### Utility profiles
 
-| Profile       | Notes                                                                         |
-| ------------- | -----------------------------------------------------------------------------:|
-| all           | For use with the `./run.sh` script. Runs all product profiles                 |
-| shared        | Used to store shared custom resources for inspec (libraries)                  |
-| github        | Used with Github Action, expects `GITHUB` environment vars for commit lookup  |
+| Profile       | Notes                                                                                                    |
+| ------------- | --------------------------------------------------------------------------------------------------------:|
+| all           | For use with the `./run.sh` script. Runs all product profiles                                            |
+| shared        | Used to store shared custom resources for inspec [libraries](profiles/shared/libraries)                  |
+| github        | Used with Github Action, expects `GITHUB` environment vars for commit lookup                             |
