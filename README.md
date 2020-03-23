@@ -11,7 +11,7 @@ This repo contains [inspec](https://www.inspec.io/) integration with the [learn]
 
 # Usage
 
-Executing this code requires two containers. The inspec container is not actually required but is provided to minimize workstation requirements. The `inspec-target` is automatically spun up. You can also run it interactivly to debug using [`./target/interactive.sh`](target/interactive.sh)
+Executing this code requires two containers. The `inspec` container is not actually required but is provided to minimize workstation requirements via [`run.sh`](run.sh). The `inspec-target` is automatically spun up. You can also run it interactivly to debug using [`./target/interactive.sh`](target/interactive.sh)
 
 # Requirements
 
