@@ -5,7 +5,7 @@ class HclSyntax < Inspec.resource(1)
 
   name 'hcl_syntax'
  
-  desc 'A wrapper to create & destroy a tf file'
+  desc 'Checks HCL syntax'
  
   example "
       describe hcl_syntax(hcl: '...') do
