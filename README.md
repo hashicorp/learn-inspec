@@ -15,7 +15,7 @@ Executing this code requires two containers. The inspec container is not actuall
 
 Docker is required, you can download it [here](https://hub.docker.com/editions/community/docker-ce-desktop-mac).
 
-## Executing a inspec profile 
+## Executing an inspec profile 
 
 In a terminal window , run the `./run.sh` script shown below. The code extracts markdown content from your local checkout/branch of the learn repo. You must provide the path to the root of your local learn repo with `-d`. You can then pass which product you wish to run tests against with. These product names correspond to inspec [profiles](https://www.inspec.io/docs/reference/profiles/)
 
