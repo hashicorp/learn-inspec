@@ -1,3 +1,4 @@
+# Sanity check
 if ENV['GITHUB_ACTIONS'] != 'true'
   raise "This profile is only meant to be used with Github Actions"
 end
@@ -8,18 +9,20 @@ require 'getoptlong'
 require 'kramdown'
 require 'yaml'
 
+# Use the github api to find the files changed between the two commits
+# The token here is set by actions via secrets.GITHUB_TOKEN for the run.
+# The event json doesn't have this data so I implement it here.
 github = Octokit::Client.new(:access_token => ENV['GITHUB_TOKEN'])
 puts "Running under Github Actions"
 
 repository     = ENV['GITHUB_REPOSITORY']
-
 branch         = CGI.escape(ENV['GITHUB_REF'].sub('refs/heads/',''))
 
 feature_branch = github.ref(repository,
                             "heads/#{branch}")
 master_branch  = github.ref(repository,
                             'heads/master')
-comparison        = github.compare(repository,
+comparison     = github.compare(repository,
                                 master_branch.object.sha,
                                 feature_branch.object.sha)
 
@@ -29,26 +32,24 @@ if comparison.status == "identical"
   skip_control 'all' 
 end
 
+# This filters our tests just down to the context of the PR's branch
+# TODO: should I use default_branch here from the API instead of master
 files_to_check = comparison.files.select do |file|
   file.status == 'added' or file.status == 'modified'
 end.map{|file| "#{ENV['MARKDOWN']}/#{file.filename}"}
 
-markdown_files = Dir.glob("#{ENV['MARKDOWN']}/pages/**/*.mdx") && files_to_check 
+# This syntax means an intersection of the two arrays.
+# Functionaly it means, file those files that have been edited and match our glob
+markdown_files = Dir.glob("#{ENV['MARKDOWN']}/#{ENV['FILE_PATTERN']}") && files_to_check
 
 raise "No markdown files found!}" if markdown_files.count.zero?
 
+# Include our shared resources
 include_controls "shared"
 
-# TODO: Can't use this as inspec.command doesn't work as inspec in nil
-# See if statement below, should track down why this doesn't work
-#   require_resource(profile: 'terraform',
-#                    resource: 'terraform_syntax',
-#                    as: 'hcl_syntax')
-
-
-# Enumerate our markdown files
+# Enumerate our matching markdown files
 markdown_files.each do |file|
-    # Load the front matter (no parsing needed)
+  # Load the front matter (no parsing needed)
   front_matter = YAML.load_file(file)
 
   control file do
@@ -64,7 +65,7 @@ markdown_files.each do |file|
 
     markdown.root.children.each_with_index do |section,index|
       case section.type
-      # Parse the codeblocks
+      # Loop through each type of code block 
       when :codeblock
         case section.options[:lang]
         when 'json'
@@ -80,8 +81,17 @@ markdown_files.each do |file|
               it { should be_valid }
           end
         when 'hcl'
-          describe hcl_syntax(hcl: section.value) do
-              it { should be_valid }
+          # Use terraform to verify hcl for terraform products
+          # TODO: Figure out why require_resource with an override causes
+          # inspec.command not to work ( be nil )
+          if front_matter['products_used'].include?('Terraform')
+            describe terraform_syntax(hcl: section.value) do
+                it { should be_valid }
+            end
+          else
+            describe hcl_syntax(hcl: section.value) do
+                it { should be_valid }
+            end
           end
         end
       end

@@ -16,6 +16,9 @@ inputs:
   github_token:
     description: 'Github token used by github profile'
     required: true
+  file_pattern:
+    description: 'The file glob e.g. pages/**/*.mdx'
+    required: true
 outputs:
   inspec-output:
     description: 'The output of inspec'
@@ -25,6 +28,7 @@ runs:
   env:
     MARKDOWN: ${{ inputs.markdown }}
     GITHUB_TOKEN: ${{ inputs.github_token }}
+    FILE_PATTERN: ${{ inputs.file_pattern }}
   args:
     - 'exec'
     - /profiles/${{ inputs.profile }}
