@@ -21,7 +21,7 @@ outputs:
     description: 'The output of inspec'
 runs:
   using: 'docker'
-  image: 'docker://acidprime/inspec' 
+  image: 'docker://hashieducation/inspec' 
   env:
     MARKDOWN: ${{ inputs.markdown }}
     GITHUB_TOKEN: ${{ inputs.github_token }}
