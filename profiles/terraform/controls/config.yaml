@@ -1,5 +1,2 @@
 ---
-products_used: ['Terraform','Terraform Enterprise']
-markdown_glob: 'pages/terraform/**/*.mdx' 
-replacements:
-  '<TOKEN>': 's.KkNJYWF5g0pomcCLEmDdOVCW'
+markdown_glob: '**/terraform/**/*.mdx' 
