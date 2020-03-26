@@ -90,13 +90,18 @@ class ShellSyntax < Inspec.resource(1)
       parsed_command = lines[0].lstrip
     elsif lines[0].lstrip[0] == '#'
       # Handle comment at line 0 of the code block 
-      parsed_command = lines[1].lstrip
+      parsed_command = lines[1].lstrip if  lines.count > 1
+
+      # Assume anything thats a single line is a root prompt
+      parsed_command = lines[0].sub(/^#/,'').lstrip if  lines.count == 1
     elsif lines[0].lstrip[0] == '/'
       # Handle docker exec style prompts
       parsed_command = lines[0].lstrip.sub(%r{^/}, '').lstrip
     end
 
     parsed_command
+  rescue
+    raise "Unable to parse command \n : #{value}"
   end
 
   def validate_shell(value,command)
