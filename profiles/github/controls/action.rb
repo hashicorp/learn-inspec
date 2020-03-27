@@ -50,14 +50,13 @@ end
 
 # This syntax means an intersection of the two arrays.
 # Functionaly it means, file those files that have been edited and match our glob
-markdown_files = Dir.glob("#{ENV['MARKDOWN']}/#{ENV['FILE_PATTERN']}") && files_to_check
+markdown_files = Dir.glob("#{ENV['MARKDOWN']}/#{ENV['FILE_PATTERN']}") & files_to_check
 
 # Include our shared resources
 include_controls "shared"
 
 # Enumerate our matching markdown files
 markdown_files.each do |file|
-  next unless File.extname(file) == '.mdx'
   # Load the front matter (no parsing needed)
   front_matter = YAML.load_file(file)
 
