@@ -49,6 +49,7 @@ include_controls "shared"
 
 # Enumerate our matching markdown files
 markdown_files.each do |file|
+  next unless File.extname(file) == '.mdx'
   # Load the front matter (no parsing needed)
   front_matter = YAML.load_file(file)
 
