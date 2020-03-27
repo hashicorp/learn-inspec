@@ -42,8 +42,6 @@ end.map{|file| "#{ENV['MARKDOWN']}/#{file.filename}"}
 # Functionaly it means, file those files that have been edited and match our glob
 markdown_files = Dir.glob("#{ENV['MARKDOWN']}/#{ENV['FILE_PATTERN']}") && files_to_check
 
-raise "No markdown files found!}" if markdown_files.count.zero?
-
 # Include our shared resources
 include_controls "shared"
 
