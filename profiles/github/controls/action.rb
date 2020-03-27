@@ -28,7 +28,7 @@ comparison     = github.compare(repository,
 
 # Sanity check
 if comparison.status == "identical"
-  puts "Commits are identical"
+  puts "Commits are identical (merge commit?)"
   skip_control 'all' 
 end
 
