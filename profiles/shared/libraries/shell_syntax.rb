@@ -16,6 +16,14 @@ class ShellSyntax < Inspec.resource(1)
 
   def initialize(value: ,replacements:)
     @value   = value
+
+    # Fail early for any known skips
+    if @value.lines[0].count("'") == 1
+      return skip_resource \
+        "Skipping test: Can't parse single quoted multiline commands (firstline) \n #{value}"
+    end
+
+    # Attempt to parse the command
     @command = parse_command(replace_pseudo(value,replacements))
 
     # Skip criteria
@@ -25,6 +33,9 @@ class ShellSyntax < Inspec.resource(1)
     elsif @command.match(/(<\w+.*\w+?>|\.\.\.)/)
       return skip_resource \
         "Skipping test: Pseudo variable or ellipses detected \n #{value}"
+    #elsif @command.lines[-1].count("'") == 1
+    #   return skip_resource \
+    #     "Skipping test: Can't parse single quoted multiline commands (last parsed line)\n #{value}"
     end
   end
 
