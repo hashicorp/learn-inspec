@@ -1,14 +1,15 @@
 # Sanity check
-if ENV['GITHUB_ACTIONS'] != 'true'
-  raise "This profile is only meant to be used with Github Actions"
-end
-
 require 'octokit'
 require 'cgi'
 require 'getoptlong'
 require 'kramdown'
 require 'yaml'
 
+if ENV['GITHUB_ACTIONS'] != 'true'
+  raise "This profile is only meant to be used with Github Actions"
+end
+
+# TODO: Need to clean this up a bit
 # Use the github api to find the files changed between the two commits
 # The token here is set by actions via secrets.GITHUB_TOKEN for the run.
 # The event json doesn't have this data so I implement it here.
@@ -18,25 +19,34 @@ puts "Running under Github Actions"
 repository     = ENV['GITHUB_REPOSITORY']
 branch         = CGI.escape(ENV['GITHUB_REF'].sub('refs/heads/',''))
 
-feature_branch = github.ref(repository,
-                            "heads/#{branch}")
-master_branch  = github.ref(repository,
-                            'heads/master')
-comparison     = github.compare(repository,
-                                master_branch.object.sha,
-                                feature_branch.object.sha)
+begin
+ feature_branch = github.ref(repository,
+                             "heads/#{branch}")
 
-# Sanity check
-if comparison.status == "identical"
-  puts "Commits are identical (merge commit?)"
-  skip_control 'all' 
+ master_branch  = github.ref(repository,
+                             'heads/master')
+ comparison     = github.compare(repository,
+                                 master_branch.object.sha,
+                                 feature_branch.object.sha)
+ 
+ # Sanity check
+ if comparison.status == "identical"
+   puts "Commits are identical (merge commit?)"
+   skip_control 'all' 
+ end
+ 
+ # This filters our tests just down to the context of the PR's branch
+ # TODO: should I use default_branch here from the API instead of master
+ files_to_check = comparison.files.select do |file|
+   file.status == 'added' or file.status == 'modified'
+ end.map{|file| "#{ENV['MARKDOWN']}/#{file.filename}"}
+
+rescue Octokit::NotFound
+  puts "Branch #{ENV['GITHUB_REF']} no longer exists"
+  puts "Unable to lookup files that changed"
+  skip_control 'all'
+  files_to_check = []
 end
-
-# This filters our tests just down to the context of the PR's branch
-# TODO: should I use default_branch here from the API instead of master
-files_to_check = comparison.files.select do |file|
-  file.status == 'added' or file.status == 'modified'
-end.map{|file| "#{ENV['MARKDOWN']}/#{file.filename}"}
 
 # This syntax means an intersection of the two arrays.
 # Functionaly it means, file those files that have been edited and match our glob
