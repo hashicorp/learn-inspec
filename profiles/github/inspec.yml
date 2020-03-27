@@ -6,7 +6,7 @@ copyright: Hashicorp Inc.
 copyright_email: zsmith@hashicorp.com
 license: Apache-2.0
 summary: This profile dynamically loads controls based on commit changes 
-version: 2.0.3
+version: 2.0.4
 depends:
   - name: all
     path: ../all
