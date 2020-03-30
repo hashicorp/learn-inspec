@@ -38,6 +38,7 @@ runs:
     - 'html:inspec.html'
     - '--show-progress'
     - '--no-color'
+    - '--no-distinct-exit'
     - '--input-file'
     - '/input.yml'
 branding:
