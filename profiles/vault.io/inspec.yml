@@ -1,0 +1,22 @@
+---
+name: vault.io 
+title: Vault.io profile 
+maintainer: Zack Smith
+copyright: Hashicorp Inc.
+copyright_email: zsmith@hashicorp.com
+license: Apache-2.0
+summary: This profile checks the syntax of the https://vault.io website 
+version: 2.0.0
+depends:
+  - name: shared
+    path: ../shared
+inputs:
+  - name: replacements
+    type: hash
+    value:
+      '<TOKEN>': 's.KkNJYWF5g0pomcCLEmDdOVCW'
+  - name:  products_used
+    type: array
+    value: ['Nomad','Nomad Enterprise'] 
+  - name: files_to_check
+    value: []
