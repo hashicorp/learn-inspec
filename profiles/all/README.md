@@ -1,6 +1,6 @@
 # Run all tests 
 
-Runs all product profiles. 
+Runs all learn profiles. 
 
 ## Usage
 
