@@ -12,8 +12,6 @@ markdown_files = if input('files_to_check').empty?
                    Dir.glob("#{ENV['MARKDOWN']}/#{$config['markdown_glob']}") && input('files_to_check')
                  end
 
-raise "No markdown files found!}" if markdown_files.count.zero?
-
 include_controls "shared"
 
 # TODO: Can't use this as inspec.command doesn't work as inspec in nil

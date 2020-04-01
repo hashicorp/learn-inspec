@@ -7,8 +7,6 @@ $config  = YAML.load(File.read("#{__dir__}/config.yaml"))
 
 markdown_files = Dir.glob("#{ENV['MARKDOWN']}/#{$config['markdown_glob']}") 
 
-raise "No markdown files found!}" if markdown_files.count.zero?
-
 include_controls "shared"
 
 
