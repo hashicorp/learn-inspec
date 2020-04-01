@@ -30,6 +30,7 @@ begin
                                  feature_branch.object.sha)
  
  # Sanity check
+ # TODO: Should we require exluding master merges?
  if comparison.status == "identical"
    puts "Commits are identical (merge commit?)"
    skip_control 'all' 
@@ -49,20 +50,29 @@ rescue Octokit::NotFound
 end
 
 # This syntax means an intersection of the two arrays.
-# Functionaly it means, file those files that have been edited and match our glob
+# Functionaly it means, find those files that have been edited and match our glob
 markdown_files = Dir.glob("#{ENV['MARKDOWN']}/#{ENV['FILE_PATTERN']}") & files_to_check
 
-# Include our shared resources
+# Include our shared (custom) *_syntax resources
 include_controls "shared"
 
 # Enumerate our matching markdown files
 markdown_files.each do |file|
   # Load the front matter (no parsing needed)
-  front_matter = YAML.load_file(file)
+  begin
+    front_matter = YAML.load_file(file)
+  rescue => error
+    "Unable to parse YAML front matter: \n #{error.message}"
+  end
+
+  # YAML schema for learn vs the .io site differences
+  page_title = front_matter['name'] || front_matter['page_title'] 
+
+  products_used  = front_matter['products_used'] || [] 
 
   control file do
     impact 1.0
-    title front_matter['name']
+    title page_title 
     desc front_matter['description']
 
     ref File.basename(file),
@@ -92,7 +102,7 @@ markdown_files.each do |file|
           # Use terraform to verify hcl for terraform products
           # TODO: Figure out why require_resource with an override causes
           # inspec.command not to work ( be nil )
-          if front_matter['products_used'].include?('Terraform')
+          if products_used.include?('Terraform')
             describe terraform_syntax(hcl: section.value) do
                 it { should be_valid }
             end
