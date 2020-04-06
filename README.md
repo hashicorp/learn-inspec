@@ -13,7 +13,7 @@ This repo contains [inspec](https://www.inspec.io/) integration with the [learn]
 
 Executing this code requires two containers. The `inspec` container is not actually required but is provided to minimize workstation requirements via [`run.sh`](run.sh). The `inspec-target` is automatically spun up. You can also run it interactivly to debug using [`./target/interactive.sh`](target/interactive.sh)
 
-# Requirements
+## Requirements
 
 Docker is required, you can download it [here](https://hub.docker.com/editions/community/docker-ce-desktop-mac).
 
