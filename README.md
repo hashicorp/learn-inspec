@@ -23,6 +23,7 @@ In a terminal window , run the `./run.sh` script shown below. The code extracts 
 
 
 ```shell
+make
 ./run.sh -p terraform -d ~/src/learn
 ./run.sh -p vault -d ~/src/learn
 ./run.sh -p nomad -d ~/src/learn
