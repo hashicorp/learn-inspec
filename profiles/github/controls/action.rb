@@ -4,53 +4,25 @@ require 'cgi'
 require 'getoptlong'
 require 'kramdown'
 require 'yaml'
+require_relative '../lib/checks.rb'
 
 if ENV['GITHUB_ACTIONS'] != 'true'
   raise "This profile is only meant to be used with Github Actions"
 end
 
-# TODO: Need to clean this up a bit
-# Use the github api to find the files changed between the two commits
-# The token here is set by actions via secrets.GITHUB_TOKEN for the run.
-# The event json doesn't have this data so I implement it here.
-github = Octokit::Client.new(:access_token => ENV['GITHUB_TOKEN'])
-puts "Running under Github Actions"
+checks = Checks.new(ENV['GITHUB_TOKEN'])
 
-repository     = ENV['GITHUB_REPOSITORY']
-branch         = CGI.escape(ENV['GITHUB_REF'].sub('refs/heads/',''))
+# Retrieve the changes file list from Github
+err, files_to_check, exit_code = checks.get_diff_from('master')
 
-begin
- feature_branch = github.ref(repository,
-                             "heads/#{branch}")
-
- master_branch  = github.ref(repository,
-                             'heads/master')
- comparison     = github.compare(repository,
-                                 master_branch.object.sha,
-                                 feature_branch.object.sha)
- 
- # Sanity check
- # TODO: Should we require exluding master merges?
- if comparison.status == "identical"
-   puts "Commits are identical (merge commit?)"
-   skip_control 'all' 
- end
- 
- # This filters our tests just down to the context of the PR's branch
- # TODO: should I use default_branch here from the API instead of master
- files_to_check = comparison.files.select do |file|
-   file.status == 'added' or file.status == 'modified'
- end.map{|file| "#{ENV['MARKDOWN']}/#{file.filename}"}
-
-rescue Octokit::NotFound
-  puts "Branch #{ENV['GITHUB_REF']} no longer exists"
-  puts "Unable to lookup files that changed"
+# Merge commits are caught here
+if err != nil 
+  puts err
   skip_control 'all'
-  files_to_check = []
-end
+end if
 
-# This syntax means an intersection of the two arrays.
 # Functionaly it means, find those files that have been edited and match our glob
+# This syntax (&) means an intersection of the two arrays.
 markdown_files = Dir.glob("#{ENV['MARKDOWN']}/#{ENV['FILE_PATTERN']}") & files_to_check
 
 # Include our shared (custom) *_syntax resources
@@ -70,6 +42,7 @@ markdown_files.each do |file|
 
   products_used  = front_matter['products_used'] || [] 
 
+  # Begining of the inspec control ( each file is a control  )
   control file do
     impact 1.0
     title page_title 
