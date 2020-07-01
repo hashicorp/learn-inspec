@@ -57,7 +57,7 @@ markdown_files.each do |file|
           describe json_syntax(value: section.value) do
               it { should be_valid }
           end
-        when 'shell'
+        when /shell|shell-session/ 
           describe shell_syntax(value: section.value, replacements: input("replacements") ) do
               it { should be_valid }
           end
