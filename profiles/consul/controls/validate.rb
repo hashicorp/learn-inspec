@@ -58,7 +58,7 @@ markdown_files.each do |file|
           end
         when 'hcl'
           # I should be able to use require_resource above but it doesn't work
-          if input('products_used').include?("Terraform")
+          if input('products_used').include?("terraform")
             describe terraform_syntax(hcl: section.value) do
                 it { should be_valid }
             end
