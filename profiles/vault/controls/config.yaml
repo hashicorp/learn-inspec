@@ -1,2 +1,2 @@
 ---
-markdown_glob: '**/vault/**/*.mdx'
+markdown_glob: 'content/tutorials/vault/**/*.mdx'

@@ -1,2 +1,2 @@
 ---
-markdown_glob: '**/terraform/**/*.mdx' 
+markdown_glob: 'content/tutorials/terraform/**/*.mdx' 

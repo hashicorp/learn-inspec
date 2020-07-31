@@ -36,15 +36,6 @@ markdown_files.each do |file|
     ref File.basename(file),
       url: 'https://github.com/hashicorp/learn/blob/master/#{file.split("/").drop(1).join("/")}'
 
-    # Sanity check
-    only_if("#{file} does not contain front matter with #{input('products_used')}") do
-      products_used = (front_matter['products_used'] & input('products_used'))
-      # The var evals to false with no front matter.
-      # If its not false then check if any of the products match our config
-      products_used &&
-        products_used.any?
-    end
-
     # Parse the markdown
     markdown = Kramdown::Document.new(File.read(file), input: 'GFM')
     
@@ -67,7 +58,7 @@ markdown_files.each do |file|
           end
         when 'hcl'
           # I should be able to use require_resource above but it doesn't work
-          if input('products_used').include?("Terraform")
+          if input('products_used').include?("terraform")
             describe terraform_syntax(hcl: section.value) do
                 it { should be_valid }
             end
