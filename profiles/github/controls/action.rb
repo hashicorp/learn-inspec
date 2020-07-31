@@ -92,7 +92,7 @@ markdown_files.each do |file|
           # Use terraform to verify hcl for terraform products
           # TODO: Figure out why require_resource with an override causes
           # inspec.command not to work ( be nil )
-          if front_matter['products_used'].include?('Terraform')
+          if front_matter['products_used'].include?('terraform')
             describe terraform_syntax(hcl: section.value) do
                 it { should be_valid }
             end
