@@ -17,6 +17,6 @@ inputs:
       '<TOKEN>': 's.KkNJYWF5g0pomcCLEmDdOVCW'
   - name:  products_used
     type: array
-    value: ['Terraform','Terraform Enterprise']
+    value: ['terraform','Terraform Enterprise']
   - name: files_to_check 
     value: []
