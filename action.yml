@@ -24,7 +24,7 @@ outputs:
     description: 'The output of inspec'
 runs:
   using: 'docker'
-  image: 'docker://hashieducation/inspec' 
+  image: 'docker://docker.mirror.hashicorp.services/hashieducation/inspec' 
   env:
     MARKDOWN: ${{ inputs.markdown }}
     GITHUB_TOKEN: ${{ inputs.github_token }}
