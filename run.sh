@@ -1,5 +1,9 @@
 #!/bin/bash -x
 
+trap cleanup EXIT
+trap cleanup TERM
+trap cleanup ERR
+
 # Run our ruby environment in docker for portablity
 function inspec() {
   docker run \
@@ -16,6 +20,26 @@ function help() {
   echo <<HELP
   Usage: $0 -d ~/learn/pages -p terraform
 HELP
+}
+
+# Cleanup function TRAP'ed
+function cleanup(){
+    command docker kill inspec-target
+}
+
+# Multi os browser integration
+function open () {
+  case "$OSTYPE" in
+     cygwin*)
+        command "cmd" /c start $@
+        ;;
+     linux*)
+        command "xdg-open" $@ &
+        ;;
+     darwin*)
+        command "open" $@
+        ;;
+  esac
 }
 
 
@@ -57,6 +81,7 @@ inspec check "profiles/${PROFILE:?"Pass with -p"}" &&
       --log-level=debug \
       --show-progress
 
+
 [ -f "$HTML_REPORT" ] && open "$HTML_REPORT"
 
-docker kill inspec-target
+cleanup

@@ -1,11 +1,11 @@
 ---
-name: terraform 
-title: Terraform profile 
+name: packer 
+title: Packer profile 
 maintainer: Zack Smith
 copyright: Hashicorp Inc.
 copyright_email: zsmith@hashicorp.com
 license: Apache-2.0
-summary: This profile generates controls from terraform codeblocks in markdown 
+summary: This profile generates controls from packer codeblocks in markdown 
 version: 2.0.0
 depends:
   - name: shared
@@ -17,6 +17,6 @@ inputs:
       '<TOKEN>': 's.KkNJYWF5g0pomcCLEmDdOVCW'
   - name:  products_used
     type: array
-    value: ['terraform','Terraform Enterprise']
+    value: ['packer']
   - name: files_to_check 
     value: []
