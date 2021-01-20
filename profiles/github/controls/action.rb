@@ -96,6 +96,11 @@ markdown_files.each do |file|
             describe terraform_syntax(hcl: section.value) do
                 it { should be_valid }
             end
+          # TODO: Update this when https://github.com/hashicorp/packer/pull/10500 is merged
+          elsif front_matter['products_used'].include?('packer')
+            describe terraform_syntax(hcl: section.value) do
+                it { should be_valid }
+            end
           else
             describe hcl_syntax(hcl: section.value) do
                 it { should be_valid }

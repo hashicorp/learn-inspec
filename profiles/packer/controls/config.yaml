@@ -1,0 +1,2 @@
+---
+markdown_glob: 'content/tutorials/packer/**/*.mdx' 
