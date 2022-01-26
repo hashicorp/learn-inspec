@@ -15,6 +15,7 @@ end
 # The event json doesn't have this data so I implement it here.
 github = Octokit::Client.new(:access_token => ENV['GITHUB_TOKEN'])
 puts "Running under Github Actions"
+puts "\tUsing default branch: #{ENV['DEFAULT_BRANCH']}"
 
 repository     = ENV['GITHUB_REPOSITORY']
 branch         = CGI.escape(ENV['GITHUB_REF'].sub('refs/heads/',''))
@@ -41,9 +42,9 @@ begin
    file.status == 'added' or file.status == 'modified'
  end.map{|file| "#{ENV['MARKDOWN']}/#{file.filename}"}
 
-rescue Octokit::NotFound
+rescue Octokit::NotFound => e
   puts "Branch #{ENV['GITHUB_REF']} no longer exists"
-  puts "Unable to lookup files that changed"
+  puts "Unable to lookup files that changed: #{e.inspect}"
   skip_control 'all'
   files_to_check = []
 end
