@@ -25,7 +25,7 @@ begin
                              "heads/#{branch}")
 
  master_branch  = github.ref(repository,
-                             ENV['DEFAULT_BRANCH'])
+                             "heads/#{ENV['DEFAULT_BRANCH']}")
  comparison     = github.compare(repository,
                                  master_branch.object.sha,
                                  feature_branch.object.sha)
