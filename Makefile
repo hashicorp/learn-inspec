@@ -20,7 +20,7 @@ build:
 	 -t \
 	 $(IMAGE_NAME):$(DOCKER_TAG) \
 	 .
-push:
+push: build
 	# open onepassword://search/ej6uodvxxvcetihbgwdy2wnoh4
 	# export DOCKER_API_TOKEN=<the API Token field>
 	@echo $(DOCKER_API_TOKEN) | \
