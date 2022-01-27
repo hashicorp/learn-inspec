@@ -8,7 +8,7 @@ endef
 # Otherwise we just use what the user gave us
 BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
 ifeq ($(BRANCH),master)
-    DOCKER_TAG += "latest" 
+    DOCKER_TAG += "master" 
 else
     DOCKER_TAG += $(BRANCH)
 endif
