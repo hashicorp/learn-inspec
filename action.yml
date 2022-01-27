@@ -28,7 +28,7 @@ outputs:
     description: 'The output of inspec'
 runs:
   using: 'docker'
-  image: 'docker://docker.mirror.hashicorp.services/hashieducation/inspec:ks.adds-default-branch-env'
+  image: 'docker://docker.mirror.hashicorp.services/hashieducation/inspec:master'
   env:
     MARKDOWN: ${{ inputs.markdown }}
     GITHUB_TOKEN: ${{ inputs.github_token }}
