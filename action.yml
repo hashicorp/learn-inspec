@@ -3,7 +3,7 @@
 # The input system will in the future allow more then learn
 # to be targeted by the profiles in this directory.
 name: 'Check markdown codeblocks'
-author: "Zack Smith"
+author: 'Zack Smith'
 description: 'Run inspec against markdown'
 inputs:
   profile:
@@ -19,16 +19,21 @@ inputs:
   file_pattern:
     description: 'The file glob e.g. pages/**/*.mdx'
     required: true
+  default_branch:
+    description: 'The default branch in the target repository'
+    default: 'master'
+    required: false
 outputs:
   inspec-output:
     description: 'The output of inspec'
 runs:
   using: 'docker'
-  image: 'docker://hashieducation/inspec' 
+  image: 'docker://docker.mirror.hashicorp.services/hashieducation/inspec:ks.adds-default-branch-env'
   env:
     MARKDOWN: ${{ inputs.markdown }}
     GITHUB_TOKEN: ${{ inputs.github_token }}
     FILE_PATTERN: ${{ inputs.file_pattern }}
+    DEFAULT_BRANCH: ${{ inputs.default_branch }}
   args:
     - 'exec'
     - /profiles/${{ inputs.profile }}
@@ -42,5 +47,5 @@ runs:
     - '--input-file'
     - '/input.yml'
 branding:
-  color: "black"
-  icon: "dollar-sign"
+  color: 'black'
+  icon: 'dollar-sign'
