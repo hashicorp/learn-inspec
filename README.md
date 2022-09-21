@@ -23,6 +23,11 @@ In a terminal window , run the `./run.sh` script shown below. The code extracts 
 
 
 ```shell
+# Build the inspect container
+cd $(git rev-parse --show-cdup)
+make
+# Build the inspec target container
+cd target
 make
 ./run.sh -p terraform -d ~/src/learn
 ./run.sh -p vault -d ~/src/learn
