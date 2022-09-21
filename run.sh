@@ -4,6 +4,8 @@ trap cleanup EXIT
 trap cleanup TERM
 trap cleanup ERR
 
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
 # Run our ruby environment in docker for portablity
 function inspec() {
   docker run \
@@ -11,7 +13,7 @@ function inspec() {
     -v "${LEARN_DIR:?"Pass with -d"}":/markdown \
     -v /tmp:/tmp \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    inspec \
+    inspec:$BRANCH \
     "$@"
 }
 
