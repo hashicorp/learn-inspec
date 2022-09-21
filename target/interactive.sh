@@ -1,5 +1,7 @@
 #!/bin/bash -x
 
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
 # Allow us to call script from any pwd
 SCRIPT_DIR="${0%/*}"
 
@@ -18,4 +20,4 @@ docker run \
     --entrypoint '/bin/sh' \
     -e VAULT_ADDR='http://127.0.0.1:8200' \
     --name inspec-target \
-    -ti inspec-target
+    -ti inspec-target:$BRANCH
