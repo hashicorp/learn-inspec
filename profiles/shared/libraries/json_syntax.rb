@@ -1,3 +1,6 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
 class JsonSyntax < Inspec.resource(1)
 
   name 'json_syntax'

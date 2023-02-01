@@ -1,3 +1,6 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
 class ShellSyntax < Inspec.resource(1)
 
   require 'shellwords'

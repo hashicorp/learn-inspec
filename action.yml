@@ -1,3 +1,6 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
 ---
 # This is the Github action code used for CI runs
 # The input system will in the future allow more then learn

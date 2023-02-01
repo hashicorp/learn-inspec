@@ -1,4 +1,7 @@
 #!/bin/bash -x
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
 
 trap cleanup EXIT
 trap cleanup TERM

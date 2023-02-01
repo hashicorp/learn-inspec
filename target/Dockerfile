@@ -1,3 +1,6 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
 FROM docker.mirror.hashicorp.services/hashicorp/terraform as terraform
 FROM docker.mirror.hashicorp.services/hashicorp/packer as packer
 FROM docker.mirror.hashicorp.services/consul as consul
