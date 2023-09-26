@@ -1,4 +1,7 @@
 #!/usr/bin/env ruby 
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
 require 'getoptlong'
 require 'kramdown'
 require 'yaml'

@@ -1,4 +1,7 @@
 #!/bin/bash -x
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
 
 # Allow us to call script from any pwd
 SCRIPT_DIR="${0%/*}"
