@@ -42,10 +42,10 @@ make
 
 | Profile                            | Notes                                                                         |
 | ---------------------------------- | -----------------------------------------------------------------------------:|
-| [terraform](profile/terraform)     | Extracts all `hcl`, `shell`, `json` and `yaml` codeblocks and validates them  |
-| [vault](profile/vault)             | Extracts all `shell`, `json` and `yaml` codeblocks validates them             |
-| [nomad](profile/nomad)             | Extracts all `shell`, `json` and `yaml` codeblocks validates them             |
-| [consul](profile/consul)           | Extracts all `shell`, `json` and `yaml` codeblocks validates them             |
+| [terraform](profiles/terraform)     | Extracts all `hcl`, `shell`, `json` and `yaml` codeblocks and validates them  |
+| [vault](profiles/vault)             | Extracts all `shell`, `json` and `yaml` codeblocks validates them             |
+| [nomad](profiles/nomad)             | Extracts all `shell`, `json` and `yaml` codeblocks validates them             |
+| [consul](profiles/consul)           | Extracts all `shell`, `json` and `yaml` codeblocks validates them             |
 
 > `terraform` validates syntax by passing each block as stdin via `terraform fmt -`.
 
@@ -53,9 +53,9 @@ make
 
 | Profile                  | Notes                                                                                                    |
 | ------------------------ | --------------------------------------------------------------------------------------------------------:|
-| [all](profile/all)       | For use with the `./run.sh` script. Runs all product profiles                                            |
-| [shared](profile/shared) | Used to store shared custom resources for inspec [libraries](profiles/shared/libraries)                  |
-| [github](profile/github) | Used with Github Action, expects `GITHUB` environment vars for commit lookup                             |
+| [all](profiles/all)       | For use with the `./run.sh` script. Runs all product profiles                                            |
+| [shared](profiles/shared) | Used to store shared custom resources for inspec [libraries](profiles/shared/libraries)                  |
+| [github](profiles/github) | Used with Github Action, expects `GITHUB` environment vars for commit lookup                             |
 
 # Support Files
 
